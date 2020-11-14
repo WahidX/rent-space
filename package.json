@@ -1,0 +1,19 @@
+{
+  "name": "rent-space",
+  "version": "1.0.0",
+  "description": "MERN app for helping people rent properties.",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "cd client && npm install",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "droidx",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.6"
+  }
+}
