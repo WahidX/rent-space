@@ -5,7 +5,7 @@ const port = process.env.PORT || 8000;
 const db = require("./config/mongoose");
 const session = require("express-session");
 const passport = require("passport");
-// const passportLocal = require('./config/passport-local-strategy');
+const passportLocal = require("./config/passport-local-strategy");
 const MongoStore = require("connect-mongo")(session);
 const sassMiddleware = require("node-sass-middleware");
 // const passportGoogle = require("./config/passport-google-strategy");
@@ -42,7 +42,7 @@ app.use(
   session({
     name: "rent-space",
     // TODO change this before deployment
-    secret: "somePreSharedKey",
+    secret: "sharedKey",
     saveUninitialized: false,
     resave: false,
     cookie: {
@@ -63,7 +63,7 @@ app.use(
 // Middlewares
 app.use(passport.initialize());
 app.use(passport.session());
-// app.use(passport.setAuthenticatedUser);
+app.use(passport.setAuthenticatedUser);
 app.use(flash());
 app.use(customMidWare.setFlash);
 

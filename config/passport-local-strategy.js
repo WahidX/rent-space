@@ -13,8 +13,9 @@ passport.use(
     },
     async function (req, email, password, done) {
       let user = await Seller.findOne({ email: email });
-
+      console.log("Req email", email);
       if (user) {
+        console.log("User name: ", user.name);
         // User found for that email so checking password
         let isMatch = await bcrypt.compare(password, user.password);
         if (isMatch) {
@@ -35,7 +36,7 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser(function (id, done) {
-  User.findById(id, function (err, user) {
+  Seller.findById(id, function (err, user) {
     if (err) {
       console.log("Err while getting user--> passport");
       return done(err);
@@ -49,7 +50,7 @@ passport.checkAuthentication = function (req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  return res.redirect("/auth/login");
+  return res.redirect("/auth/signin");
 };
 
 passport.setAuthenticatedUser = function (req, res, next) {

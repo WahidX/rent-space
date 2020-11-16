@@ -1,29 +1,34 @@
-<link rel="stylesheet" href="/css/form_style.css">
+<link rel="stylesheet" href="/css/form_style.css" />
 
 <div class="background">
-    <div class="form-container">
+  <div class="form-container">
+    <form action="/auth/create-user" method="post">
+      <div class="form-group">
+        <label>Name</label>
+        <input class="form-control" type="text" name="name" required />
 
-        <form action="/user/create-user" method="post">
-            <div class="form-group">
-                <label>Name</label>
-                <input class="form-control" type="text" name="name" required>
-                
-                <label>Email</label>
-                <input class="form-control" type="text" name="email" required>
-                
-                <label>Password</label>
-                <input class="form-control" type="password" name="password" required>
-                
-                <label>Confirm Password</label>
-                <input class="form-control" type="password" name="confirm_password" required>
-                
-            </div>
-            <button type="submit" class="btn btn-primary">Signup</button>
-        </form>
+        <label>Email</label>
+        <input class="form-control" type="text" name="email" required />
 
-        <p>
-            <a href="/user/auth/google">Sign up with Google</a>
-        </p>
+        <label>Contact No</label>
+        <input class="form-control" type="tel" name="contact" required />
 
-    </div>
+        <label>Password</label>
+        <input class="form-control" type="password" name="password" required />
+
+        <label>Confirm Password</label>
+        <input
+          class="form-control"
+          type="password"
+          name="confirm_password"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Signup</button>
+    </form>
+
+    <p>
+      <a href="/user/auth/google">Sign up with Google</a>
+    </p>
+  </div>
 </div>
