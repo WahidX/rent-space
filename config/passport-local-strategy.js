@@ -13,9 +13,8 @@ passport.use(
     },
     async function (req, email, password, done) {
       let user = await Seller.findOne({ email: email });
-      console.log("Req email", email);
+
       if (user) {
-        console.log("User name: ", user.name);
         // User found for that email so checking password
         let isMatch = await bcrypt.compare(password, user.password);
         if (isMatch) {

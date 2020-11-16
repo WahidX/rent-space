@@ -23,7 +23,6 @@ const sellerSchema = new mongoose.Schema(
     },
     contact: {
       type: Number,
-      required: true,
     },
     properties: [
       {
