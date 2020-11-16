@@ -1,9 +1,6 @@
-.home-container h1 {
-  position: relative;
-  top: 3vh;
-  left: 6vh;
-  font-size: 3rem; }
-
-.home-container #dummy {
-  width: auto;
-  height: 90%; }
+.home-container {
+  padding: 30px;
+  position: relative; }
+  .home-container #dummy {
+    width: auto;
+    height: 90%; }

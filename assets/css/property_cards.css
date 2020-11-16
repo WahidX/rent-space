@@ -1,0 +1,41 @@
+#property-container {
+  height: 80%;
+  width: 100%;
+  margin: auto;
+  padding: 20px;
+  display: flex;
+  border-radius: 30px;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  background-color: azure; }
+  #property-container #add-btn {
+    text-decoration: none; }
+  #property-container .property-item {
+    background-color: #d0e8ff;
+    width: 200px;
+    height: 300px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: start; }
+    #property-container .property-item img {
+      border-radius: 10px; }
+    #property-container .property-item .card-title {
+      padding: 6px 6px 0px 6px;
+      font-size: 1.5rem; }
+    #property-container .property-item .application-count {
+      margin: auto;
+      padding: 3px;
+      font-size: 1.2rem; }
+      #property-container .property-item .application-count * {
+        border-radius: 10px; }
+    #property-container .property-item .card-btn-container {
+      padding: 10px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly; }
+      #property-container .property-item .card-btn-container * {
+        border-radius: 10px; }

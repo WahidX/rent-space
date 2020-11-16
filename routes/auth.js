@@ -4,8 +4,8 @@ const passport = require("passport");
 
 const authController = require("../controllers/auth_controller");
 
-router.use("/signin", authController.signin);
-router.use("/signup", authController.signup);
+router.get("/signin", authController.signin);
+router.get("/signup", authController.signup);
 router.post(
   "/create-session",
   passport.authenticate("local", { failureRedirect: "/auth/signin" }),

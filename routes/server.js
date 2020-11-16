@@ -1,10 +1,6 @@
 const express = require("express");
 const router = express.Router();
 
-// const homeController = require("../controllers/home_controller");
-
-// const { home } = require("../controllers/home_controller");
-
 router.get("/", function (req, res) {
   let data = {
     name: "Droid",
@@ -18,6 +14,7 @@ router.get("/", function (req, res) {
 
 router.use("/auth", require("./auth"));
 router.use("/seller", require("./seller"));
+router.use("/property", require("./property"));
 
 console.log("router loaded");
 
