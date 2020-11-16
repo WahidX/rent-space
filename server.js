@@ -5,7 +5,7 @@ const port = process.env.PORT || 8000;
 const app = express();
 // require('./config/view_helpers')(app);
 
-app.get('/', function(req, res){
+app.get('/test', function(req, res){
 
 	let data = {
 		'name': 'Droid',

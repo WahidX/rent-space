@@ -8,12 +8,16 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently -n 'server,client' -c 'green,blue' \"npm run server\" \"npm run client\""
   },
   "author": "droidx",
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
-    "nodemon": "^2.0.6"
+    "fs": "0.0.1-security",
+    "mongoose": "^5.10.14",
+    "nodemon": "^2.0.6",
+    "path": "^0.12.7",
+    "rotating-file-stream": "^2.1.3"
   }
 }
