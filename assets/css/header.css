@@ -1,0 +1,28 @@
+header {
+  width: 100%;
+  height: 60px;
+  background-color: cornflowerblue;
+  z-index: 5;
+  box-shadow: 0px 0px 10px 0px #000000; }
+  header a h1 {
+    text-decoration: none;
+    color: black;
+    margin-left: 30px;
+    display: inline-block; }
+  header p {
+    display: inline-block;
+    padding: 20px;
+    height: 100%; }
+    header p a {
+      color: #00418b;
+      padding: 5px;
+      text-decoration: none; }
+    header p a:hover {
+      text-decoration: none;
+      color: #00418b;
+      background-color: #34a0ff;
+      border-radius: 10px;
+      transition: 0.2s;
+      box-shadow: 0px 0px 5px 0px #00417e; }
+  header .h-btn {
+    float: right; }
