@@ -1,7 +1,75 @@
-Hi Detail Page
+<div class="form-container" style="width: 60%; margin: auto; padding: 50px">
+  <!-- or upd -->
+  <form action="/property/create" method="post">
+    <div class="form-group">
+      <label>Title</label>
+      <input class="form-control" type="text" name="title" required /><br />
 
-<form method="POST">
-  Will be updating the property or create one
-  <label>label: </label>
-  <input type="text" />
-</form>
+      <label>Description</label>
+      <textarea
+        class="form-control"
+        name="description"
+        cols="40"
+        rows="5"
+        required
+      ></textarea
+      ><br />
+
+      <label for="location">Location </label>
+      <select name="location" id="location">
+        <option value="Kolkata">Kolkata</option>
+        <option value="Bangalore">Bangalore</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Chennai">Chennai</option>
+      </select>
+      <br /><br />
+
+      <label for="type">Type</label>
+      <select name="type" id="type">
+        <option value="Rent">Rent</option>
+        <option value="Sale">Sale</option></select
+      ><br />
+
+      <label>Rent</label>
+      <input
+        type="number"
+        min="1"
+        step=".01"
+        style="width: 80px"
+        required
+      />K/month<br />
+
+      <label>Sale</label>
+      <input
+        type="number"
+        min="1"
+        step=".01"
+        style="width: 80px"
+        required
+      />Lacs<br /><br />
+
+      <label>Beds</label>
+      <input
+        type="number"
+        min="1"
+        step="1"
+        name="beds"
+        style="width: 80px"
+        required
+      /><br />
+
+      <label>Baths</label>
+      <input
+        type="number"
+        min="1"
+        step="1"
+        name="baths"
+        style="width: 80px"
+        required
+      /><br />
+    </div>
+    <!-- Logic for upd/create -->
+    <button type="submit" class="btn btn-primary">Update/Submit</button>
+  </form>
+</div>

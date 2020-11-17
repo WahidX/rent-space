@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 // const multer = require('multer');
-const path = require("path");
+const path = require('path');
 // const AVATAR_PATH = path.join('/uploads/users/avatars');
 
 const propertySchema = new mongoose.Schema(
@@ -15,9 +15,9 @@ const propertySchema = new mongoose.Schema(
     location: {
       type: String,
       required: true,
-      enum: ["Kolkata", "Bangalore", "Mumbai", "Delhi", "Chennai"],
+      enum: ['Kolkata', 'Bangalore', 'Mumbai', 'Delhi', 'Chennai'],
     },
-    avatar: {
+    image: {
       type: String,
     },
     rent: {
@@ -36,17 +36,17 @@ const propertySchema = new mongoose.Schema(
     },
     type: {
       type: String,
-      enum: ["rent", "sale"],
+      enum: ['Rent', 'Sale'],
       required: true,
     },
     seller: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Seller",
+      ref: 'Seller',
     },
     applications: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Application",
+        ref: 'Application',
       },
     ],
   },
@@ -70,6 +70,6 @@ const propertySchema = new mongoose.Schema(
 // );
 // userSchema.statics.avatarPath = AVATAR_PATH;
 
-const Property = mongoose.model("Property", propertySchema);
+const Property = mongoose.model('Property', propertySchema);
 
 module.exports = Property;
