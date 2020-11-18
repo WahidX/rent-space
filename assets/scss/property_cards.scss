@@ -1,5 +1,5 @@
 #property-container {
-  height: 80%;
+  height: auto;
   width: 100%;
   margin: auto;
   padding: 20px;
@@ -8,20 +8,20 @@
   flex-direction: row;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  background-color: azure;
+  background-color: rgb(216, 235, 253);
 
   #add-btn {
     text-decoration: none;
   }
 
   .property-item {
-    background-color: rgb(208, 232, 255);
-    width: 200px;
+    background-color: rgb(184, 213, 240);
+    width: 215px;
     height: 300px;
     margin: 20px;
     padding: 6px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
     display: flex;
     flex-direction: column;
     justify-content: start;

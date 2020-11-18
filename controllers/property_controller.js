@@ -1,5 +1,6 @@
 const passport = require('passport');
 const Property = require('../models/property');
+const Seller = require('../models/seller');
 
 module.exports = {
   renderForm: async function (req, res) {
@@ -62,9 +63,11 @@ module.exports = {
         });
       }
 
-      console.log('Property created');
+      req.user.properties.push(newProperty.id);
+      req.user.save();
+
       req.flash('success', 'Property created successfully!');
-      return res.redirect('back');
+      return res.redirect(`/property/form?type=edit&id=${newProperty._id}`);
     } catch (err) {
       console.log('Error in creating property: ', err);
       req.flash('error', `Error: ${err}`);
@@ -75,19 +78,39 @@ module.exports = {
   updateProperty: async function (req, res) {
     // property/form?type=edit&id=ID
 
-    let property = await Property.findByIdAndUpdate(req.query.id, {
-      title: req.body.title.trim(),
-      description: req.body.description.trim(),
-      location: req.body.location,
-      beds: req.body.beds.trim(),
-      baths: req.body.baths.trim(),
-      type: req.body.type,
-      price: req.body.price.trim(),
-      rent: req.body.rent.trim(),
-    });
+    let property = await Property.findById(req.params.id);
 
-    console.log('updated');
-    req.flash('success', 'Property updated successfully!');
+    if (property && property.seller == req.user.id) {
+      property.title = req.body.title.trim();
+      property.description = req.body.description.trim();
+      property.location = req.body.location;
+      property.beds = req.body.beds.trim();
+      property.baths = req.body.baths.trim();
+      property.type = req.body.type;
+      property.price = req.body.price.trim();
+      property.rent = req.body.rent.trim();
+      property.save();
+
+      req.flash('success', 'Property updated successfully!');
+    } else {
+      req.flash('error', 'Invalid request!');
+    }
+
     return res.redirect('back');
+  },
+
+  deleteProperty: async function (req, res) {
+    let property = await Property.findById(req.params.id);
+
+    if (property && property.seller == req.user.id) {
+      req.user.properties.pull(property.id);
+      property.remove();
+
+      req.flash('success', 'Property deleted successfully!');
+      return res.redirect('back');
+    } else {
+      req.flash('error', 'Invalid request!');
+      return res.redirect('back');
+    }
   },
 };

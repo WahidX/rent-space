@@ -19,5 +19,10 @@ router.post(
   passport.checkAuthentication,
   propertyController.updateProperty
 );
+router.get(
+  '/delete/:id',
+  passport.checkAuthentication,
+  propertyController.deleteProperty
+);
 
 module.exports = router;
