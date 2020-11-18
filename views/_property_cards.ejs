@@ -14,10 +14,10 @@
     <div class="property-item" id="prop-...">
         <img width=200px height=160px src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.wrGDCtxJc2rb9rgfGaQSCwHaE7%26pid%3DApi&f=1"></img>
         <span class="card-title">Sample Title</span>
-        <a href="#" class="application-count" count=""><button style="color: rgb(0, 132, 255);" > Applications: 5</button></a>
+        <a href="#" class="application-count" count=""><button class="btn btn-info"> Applications: 5</button></a>
         <div class="card-btn-container">
-          <a href="/property/form?type=edit&id=ID"><button>Edit</button></a>
-          <a href="#"><button>Delete</button></a>
+          <a href="/property/form?type=edit&id=ID"><button class="btn btn-outline-success">Edit</button></a>
+          <a href="#"><button class="btn btn-outline-danger">Delete</button></a>
         </div>
     </div>
  
@@ -26,14 +26,13 @@
       <div class="property-item" id="property-<%= prop._id %>">
         <img width=200px height=160px src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.wrGDCtxJc2rb9rgfGaQSCwHaE7%26pid%3DApi&f=1"></img>
         <span class="card-title"><%= prop.title %></span>
-        <a href="#" class="application-count" count=""><button <% if(prop.applications.length>0){ %> style="background-color: red;" <% } %>> Applications: <%= prop.applications.length %></button></a>
+        <a href="#" class="application-count" count=""><button class="btn btn-info"> Applications: <%= prop.applications.length %></button></a>
         <div class="card-btn-container">
-          <a href="/property/form?type=edit&id=<%= prop._id %>"><button>Edit</button></a>
-          <a href="/property/delete/<%= prop._id %>"><button>Delete</button></a>
+          <a href="/property/form?type=edit&id=<%= prop._id %>"><button class="btn btn-outline-success">Edit</button></a>
+          <a href="/property/delete/<%= prop._id %>"><button class="btn btn-outline-danger">Delete</button></a>
         </div>
       </div>
 
     <% } %> 
-
 
 </div>
