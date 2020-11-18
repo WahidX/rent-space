@@ -4,8 +4,20 @@ const passport = require('passport');
 
 const propertyController = require('../controllers/property_controller');
 
-router.get('/form', propertyController.renderDetail);
-router.use('/create', propertyController.createProperty);
-router.post('/update/:id', propertyController.updateProperty);
+router.get(
+  '/form',
+  passport.checkAuthentication,
+  propertyController.renderForm
+);
+router.post(
+  '/create',
+  passport.checkAuthentication,
+  propertyController.createProperty
+);
+router.post(
+  '/update/:id',
+  passport.checkAuthentication,
+  propertyController.updateProperty
+);
 
 module.exports = router;

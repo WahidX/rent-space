@@ -1,48 +1,48 @@
-const express = require("express");
-const expressEjsLayouts = require("express-ejs-layouts");
+const express = require('express');
+const expressEjsLayouts = require('express-ejs-layouts');
 const app = express();
 const port = process.env.PORT || 8000;
-const db = require("./config/mongoose");
-const session = require("express-session");
-const passport = require("passport");
-const passportLocal = require("./config/passport-local-strategy");
-const MongoStore = require("connect-mongo")(session);
-const sassMiddleware = require("node-sass-middleware");
-const passportGoogle = require("./config/passport-google-strategy");
-const flash = require("connect-flash");
-const customMidWare = require("./config/middleware");
+const db = require('./config/mongoose');
+const session = require('express-session');
+const passport = require('passport');
+const passportLocal = require('./config/passport-local-strategy');
+const MongoStore = require('connect-mongo')(session);
+const sassMiddleware = require('node-sass-middleware');
+const passportGoogle = require('./config/passport-google-strategy');
+const flash = require('connect-flash');
+const customMidWare = require('./config/middleware');
 
 // sass middleware setup
 app.use(
   sassMiddleware({
-    src: "./assets/scss",
-    dest: "./assets/css",
+    src: './assets/scss',
+    dest: './assets/css',
     debug: true,
-    outputStyle: "extended",
-    prefix: "/css",
+    outputStyle: 'extended',
+    prefix: '/css',
   })
 );
 
 // Assets
-app.use(express.static("./assets"));
+app.use(express.static('./assets'));
 
 // Layout1s
 app.use(expressEjsLayouts);
-app.set("layout extractStyles", true);
-app.set("layout extractScripts", true);
+app.set('layout extractStyles', true);
+app.set('layout extractScripts', true);
 
 // Decode post reqs
 app.use(express.urlencoded());
 
 // View Engine
-app.set("view engine", "ejs");
-app.set("views", "./views");
+app.set('view engine', 'ejs');
+app.set('views', './views');
 
 app.use(
   session({
-    name: "rent-space",
+    name: 'rent-space',
     // TODO change this before deployment
-    secret: "sharedKey",
+    secret: 'sharedKey',
     saveUninitialized: false,
     resave: false,
     cookie: {
@@ -51,10 +51,10 @@ app.use(
     store: new MongoStore(
       {
         mongooseConnection: db,
-        autoRemove: "disabled",
+        autoRemove: 'disabled',
       },
       function (err) {
-        console.log(err || "connect-mongo-db setup OK");
+        console.log(err || 'connect-mongo-db setup OK');
       }
     ),
   })
@@ -68,7 +68,7 @@ app.use(flash());
 app.use(customMidWare.setFlash);
 
 // Router
-app.use("/", require("./routes/server"));
+app.use('/', require('./routes/server'));
 
 app.listen(port, function (err) {
   if (err) {
