@@ -1,0 +1,63 @@
+<link rel="stylesheet" href="/css/application.css" />
+
+<div id="application-main-container">
+  <div id="topbar-container">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link <% if(!mode){ %>active <% } %>" href="/application"
+          >All</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link <% if(mode=='Pending'){ %>active <% } %>"
+          href="/application?mode=Pending"
+          >Pending</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link <% if(mode=='Accepted'){ %>active <% } %>"
+          href="/application?mode=Accepted"
+          >Accepted</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link <% if(mode=='Rejected'){ %>active <% } %>"
+          href="/application?mode=Rejected"
+          >Rejected</a
+        >
+      </li>
+    </ul>
+  </div>
+
+  <div id="application-list-container">
+    <div class="list-item">
+      <img width="100px" height="100px" />
+      <div class="tenant-details">
+        <p>tenant name</p>
+        <p>tenant contact</p>
+        <p>tenant message</p>
+      </div>
+      <div class="btns">
+        <button class="btn btn-outline-success">accept</button>
+        <button class="btn btn-outline-danger">reject</button>
+      </div>
+    </div>
+
+    <% for (app of applications){ %>
+    <div class="list-item" id="application-<%= app._id %>">
+      <img width="100px" height="100px" />
+      <div class="tenant-details">
+        <p><%= app.tenant.name %></p>
+        <p><%= app.tenant.contact %></p>
+      </div>
+      <div class="btns">
+        <a href=""><button class="btn btn-outline-success">accept</button></a>
+        <a href=""><button class="btn btn-outline-danger">reject</button></a>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>

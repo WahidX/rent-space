@@ -15,6 +15,7 @@ router.get('/', function (req, res) {
 router.use('/auth', require('./auth'));
 router.use('/seller', require('./seller'));
 router.use('/property', require('./property'));
+router.use('/application', require('./application'));
 
 console.log('router loaded');
 
