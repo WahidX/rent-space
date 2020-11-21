@@ -3,8 +3,20 @@ const router = express.Router();
 
 router.get('/', function (req, res) {
   let data = {
-    name: 'Droid',
-    hobby: 'Gaming',
+    properties: [
+      {
+        name: 'Droid',
+        hobby: 'Assaulting',
+      },
+      {
+        name: 'Bot',
+        hobby: 'Sniping',
+      },
+      {
+        name: 'Wahid',
+        hobby: 'Gaming',
+      },
+    ],
   };
 
   return res.json(200, {

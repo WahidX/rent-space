@@ -11,6 +11,25 @@ const sassMiddleware = require('node-sass-middleware');
 const passportGoogle = require('./config/passport-google-strategy');
 const flash = require('connect-flash');
 const customMidWare = require('./config/middleware');
+const cors = require('cors');
+
+// to allow react to hit the apis
+const allowedOrigins = ['http://localhost:3000', 'http://localhost:8000'];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        var msg =
+          'The CORS policy for this site does not ' +
+          'allow access from the specified Origin.';
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
+  })
+);
 
 // sass middleware setup
 app.use(

@@ -1,27 +1,22 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { fetchProperty } from '../actions/property';
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      obj: {},
-    };
-  }
-
   componentDidMount() {
-    fetch('/test')
-      .then((res) => res.json())
-      .then((data) =>
-        this.setState({
-          obj: data,
-        })
-      );
+    this.props.dispatch(fetchProperty());
   }
 
   render() {
-    console.log('Render: ', this.state.obj);
-    return <div>Hi There</div>;
+    console.log('PROPS: ', this.props);
+    return <div>this is App</div>;
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    property: state.property,
+  };
+}
+
+export default connect(mapStateToProps)(App);
