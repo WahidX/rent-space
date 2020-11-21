@@ -1,31 +1,26 @@
 import React from 'react';
-import './App.css';
 
-class App extends React.Component{
-
-  constructor(){
+class App extends React.Component {
+  constructor() {
     super();
     this.state = {
-      obj: {}
-    }
+      obj: {},
+    };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     fetch('/test')
-      .then( res => res.json() )
-      .then( data => this.setState({
-        obj: data
-      }));
+      .then((res) => res.json())
+      .then((data) =>
+        this.setState({
+          obj: data,
+        })
+      );
   }
 
-  render(){
-    console.log("Render: ", this.state.obj);
-    return (
-      <div>
-        Hi There
-
-      </div>
-    );
+  render() {
+    console.log('Render: ', this.state.obj);
+    return <div>Hi There</div>;
   }
 }
 
