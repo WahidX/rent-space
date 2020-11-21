@@ -63,6 +63,6 @@ module.exports = {
   destroySession: function (req, res) {
     req.logout();
     req.flash('success', 'Logged out successfully!');
-    return res.redirect('/seller/signin');
+    return res.redirect('/auth/signin');
   },
 };

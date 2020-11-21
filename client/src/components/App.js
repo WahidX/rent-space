@@ -1,5 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import property from '../reducers/property';
+
+import { Header, Filter, PropertyList, Footer } from './index';
+
 import { fetchProperty } from '../actions/property';
 
 class App extends React.Component {
@@ -8,8 +12,18 @@ class App extends React.Component {
   }
 
   render() {
-    console.log('PROPS: ', this.props);
-    return <div>this is App</div>;
+    const { property } = this.props;
+    console.log('PROPS: ', property);
+
+    return (
+      <div>
+        <Header />
+        <div>this is App</div>
+        <Filter />
+        <PropertyList properties={property} />
+        <Footer />
+      </div>
+    );
   }
 }
 

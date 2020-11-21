@@ -8,14 +8,13 @@ export function fetchProperty() {
         return response.json();
       })
       .then((data) => {
-        console.log('DATA: ', data.data.properties);
+        console.log('DATA from API : ', data.data.properties);
         dispatch(updateProperty(data.data.properties));
       });
   };
 }
 
 export function updateProperty(property) {
-  console.log('UPD::::::, ', UPDATE_PROPERTY);
   return {
     type: UPDATE_PROPERTY,
     property,
