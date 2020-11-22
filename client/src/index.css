@@ -92,6 +92,10 @@ button {
   border-radius: 4px;
 }
 
+.form-container button:disabled {
+  cursor: not-allowed;
+}
+
 .form-container a {
   margin-top: 10px;
   padding: 8px;

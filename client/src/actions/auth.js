@@ -40,7 +40,7 @@ export function signin(email, password) {
 
         if (data.success) {
           // action to save user
-          dispatch(loginSuccess(data.user));
+          dispatch(loginSuccess(data.data.user));
           return;
         }
         dispatch(loginFailed(data.message));

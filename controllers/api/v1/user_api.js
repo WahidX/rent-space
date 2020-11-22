@@ -10,21 +10,22 @@ module.exports.createSession = async function (req, res) {
     if (user) {
       let isMatch = await bcrypt.compare(req.body.password, user.password);
       if (!isMatch) {
-        return res.json(422, {
+        return res.status(422).json({
           message: 'Incorrect email/password',
         });
       }
     }
 
-    return res.json(200, {
+    return res.status(200).json({
       message: 'Sign in successful!',
+      success: true,
       data: {
         user,
         token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: '10000' }),
       },
     });
   } catch (err) {
-    return res.json(422, {
+    return res.status(422).json({
       message: 'Incorrect email/password',
     });
   }
@@ -36,7 +37,7 @@ module.exports.createUser = async function (req, res) {
     let user2 = await User.findOne({ contact: req.body.contact });
 
     if (user1 || user2) {
-      return res.json(422, {
+      return res.status(422).json({
         message: 'Email or Contact No already registered',
       });
     }
@@ -59,6 +60,7 @@ module.exports.createUser = async function (req, res) {
 
     return res.json(200, {
       message: 'User created Successfully',
+      success: true,
       data: {
         user: newUser,
       },
