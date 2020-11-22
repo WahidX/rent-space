@@ -1,4 +1,4 @@
-import { LOGIN_START } from './actionTypes';
+import { LOGIN_FAILED, LOGIN_START, LOGIN_SUCCESS } from './actionTypes';
 import { APIurls } from '../helpers/urls';
 import { getFormBody } from '../helpers/utils';
 
@@ -8,8 +8,24 @@ export function startLogin() {
   };
 }
 
+export function loginFailed(errorMessage) {
+  return {
+    type: LOGIN_FAILED,
+    error: errorMessage,
+  };
+}
+
+export function loginSuccess(user) {
+  return {
+    type: LOGIN_SUCCESS,
+    user,
+  };
+}
+
 export function signin(email, password) {
-  return (dispath) => {
+  return (dispatch) => {
+    dispatch(startLogin());
+
     const url = APIurls.signin();
     fetch(url, {
       method: 'POST',
@@ -21,6 +37,13 @@ export function signin(email, password) {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+
+        if (data.success) {
+          // action to save user
+          dispatch(loginSuccess(data.user));
+          return;
+        }
+        dispatch(loginFailed(data.message));
       });
   };
 }

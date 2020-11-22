@@ -5,7 +5,7 @@ export function getFormBody(params) {
     let encodedKey = encodeURIComponent(key);
     let encodedValue = encodeURIComponent(params[key]);
 
-    formBody(encodedKey + '=' + encodedValue);
+    formBody.push(encodedKey + '=' + encodedValue);
   }
 
   return formBody.join('&');

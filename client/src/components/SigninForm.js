@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import { signin } from '../actions/auth';
 
 class SigninForm extends Component {
@@ -33,10 +35,14 @@ class SigninForm extends Component {
   };
 
   render() {
+    const { error, inProgress } = this.props.auth;
+
     return (
       <div>
         <form className="form-container">
           <div className="form-title">Sign In</div>
+
+          {error && <span className="form-error">{error}</span>}
 
           <input
             type="text"
@@ -54,13 +60,33 @@ class SigninForm extends Component {
           ></input>
           <br></br>
 
-          <button type="submit" onClick={this.handleFormSubmit}>
-            Sign In
-          </button>
+          {inProgress ? (
+            <button
+              type="submit"
+              onClick={this.handleFormSubmit}
+              disabled={inProgress}
+            >
+              Signing in ...
+            </button>
+          ) : (
+            <button
+              type="submit"
+              onClick={this.handleFormSubmit}
+              disabled={inProgress}
+            >
+              Sign In
+            </button>
+          )}
         </form>
       </div>
     );
   }
 }
 
-export default SigninForm;
+function mapStateToProps(state) {
+  return {
+    auth: state.auth,
+  };
+}
+
+export default connect(mapStateToProps)(SigninForm);
