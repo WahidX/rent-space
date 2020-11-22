@@ -41,12 +41,14 @@ module.exports.createUser = async function (req, res) {
         message: 'Email or Contact No already registered',
       });
     }
-
-    // if (req.body.password !== req.body.confirm_password) {
-    //   return res.json(422, {
-    //     message: "Passwords didn't match!",
-    //   });
-    // }
+    let p1 = req.body.password;
+    let p2 = req.body.confirm_password;
+    console.log(p1, p2, p1 !== p2);
+    if (p1 != p2) {
+      return res.status(422).json({
+        message: "Passwords didn't match!",
+      });
+    }
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
@@ -58,7 +60,7 @@ module.exports.createUser = async function (req, res) {
       contact: req.body.contact,
     });
 
-    return res.json(200, {
+    return res.status(200).json({
       message: 'User created Successfully',
       success: true,
       data: {
@@ -67,7 +69,7 @@ module.exports.createUser = async function (req, res) {
     });
   } catch (err) {
     console.log('Err:  ', err);
-    return res.json(500, {
+    return res.status(500).json({
       message: 'Internal Server Error',
     });
   }
