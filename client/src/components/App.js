@@ -20,7 +20,6 @@ class App extends React.Component {
       <div>
         <Router>
           <Header />
-          <div>this is App</div>
 
           <Switch>
             <Route exact path="/" component={Home} />
