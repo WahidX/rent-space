@@ -29,7 +29,7 @@ router.use('/seller', require('./seller'));
 router.use('/property', require('./property'));
 router.use('/application', require('./application'));
 
-// router.use('/api', require('./api/server'));
+router.use('/api', require('./api/server'));
 
 console.log('router loaded');
 

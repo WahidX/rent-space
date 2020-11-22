@@ -1,8 +1,10 @@
-// const express = require('express');
-// const router = express.Router();
+const express = require('express');
+const router = express.Router();
+const userAPI = require('../../../controllers/api/v1/user_api');
 
 // auth
-// router.get('/:id', userDetails);
+router.post('/create-session', userAPI.createSession);
+
 // router.get('/:id', userDetails);
 
-// module.exports = router;
+module.exports = router;
