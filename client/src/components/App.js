@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import property from '../reducers/property';
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
-import { Header, Filter, PropertyList, Footer } from './index';
-
+// Components
+import { Header, Home, Footer, SigninForm, SignupForm } from './index';
+// Actions
 import { fetchProperty } from '../actions/property';
 
 class App extends React.Component {
@@ -17,11 +18,16 @@ class App extends React.Component {
 
     return (
       <div>
-        <Header />
-        <div>this is App</div>
-        <Filter />
-        <PropertyList properties={property} />
-        <Footer />
+        <Router>
+          <Header />
+          <div>this is App</div>
+
+          <Route exact path="/" component={Home} />
+          <Route exact path="/signin" component={SigninForm} />
+          <Route exact path="/signup" component={SignupForm} />
+
+          <Footer />
+        </Router>
       </div>
     );
   }
