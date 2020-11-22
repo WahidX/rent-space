@@ -5,21 +5,16 @@ class Header extends Component {
   render() {
     return (
       <header id="header-container">
-        <Link to="/">Home</Link>
+        <Link className="logo" to="/">
+          Home
+        </Link>
 
         <div id="tabs-container">
-          <a href="#">
-            <div>Search</div>
-          </a>
-          <a href="#">
-            <div>Favourite</div>
-          </a>
-          <a href="#">
-            <div>Applied</div>
-          </a>
+          <Link to="/favourite">Favourite</Link>
+          <Link to="/favourite">Applied</Link>
         </div>
 
-        <div id="profile">
+        <div id="profile-links">
           <Link to="/profile">Profile</Link>
           <Link to="/signin">Sign in</Link>
           <Link to="/signup">Sign up</Link>

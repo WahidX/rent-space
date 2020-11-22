@@ -6,6 +6,7 @@ import Footer from './Footer';
 import Home from './Home';
 import SigninForm from './SigninForm';
 import SignupForm from './SignupForm';
+import Page404 from './Page404';
 
 export {
   App,
@@ -16,4 +17,5 @@ export {
   Footer,
   SigninForm,
   SignupForm,
+  Page404,
 };

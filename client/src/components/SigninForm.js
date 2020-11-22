@@ -4,13 +4,13 @@ class SigninForm extends Component {
   render() {
     return (
       <div>
-        <form>
-          <label>Name</label>
-          <input type="text" name="name"></input>
+        <form className="form-container">
+          <div className="form-title">Sign In</div>
+
+          <input type="text" placeholder="Email" name="name"></input>
           <br></br>
 
-          <label>Email</label>
-          <input type="text" name="email"></input>
+          <input type="text" placeholder="Password" name="email"></input>
           <br></br>
 
           <button type="submit">Sign In</button>
