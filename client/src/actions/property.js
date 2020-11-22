@@ -1,8 +1,9 @@
 import { UPDATE_PROPERTY } from './actionTypes';
+import { APIurls } from '../helpers/urls';
 
 export function fetchProperty() {
   return (dispatch) => {
-    const url = 'http://localhost:8000';
+    const url = APIurls.fetchProperty(1, 5);
     fetch(url)
       .then((response) => {
         return response.json();
