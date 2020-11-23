@@ -148,7 +148,7 @@ button {
   margin: 3px;
 }
 
-.filter-value input:checked + label {
+.filter-value input[type='radio']:checked + label {
   background-color: rgb(114, 255, 114);
   border-radius: 3px;
   padding: 3px;

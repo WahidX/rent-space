@@ -6,9 +6,21 @@ const Property = require('../../../models/property');
 
 module.exports.searchResults = async function (req, res) {
   try {
-    //page TODO
-    // let page = req.query.page;
-    // delete req.query[page];
+    // handling the price range
+    if (
+      typeof req.query.start !== 'undefined' ||
+      typeof req.query.end !== 'undefined'
+    ) {
+      req.query.price = {};
+      if (typeof req.query.start !== 'undefined') {
+        req.query.price.$gt = req.query.start - 0.01;
+        delete req.query.start;
+      }
+      if (typeof req.query.end !== 'undefined') {
+        req.query.price.$lt = Number(req.query.end) + 0.01;
+        delete req.query.end;
+      }
+    }
 
     let properties = await Property.find(req.query).sort('-createdAt');
 
@@ -20,6 +32,7 @@ module.exports.searchResults = async function (req, res) {
       },
     });
   } catch (err) {
+    console.log('ERR: ', err);
     return res.status(404).json({
       message: 'No Records found',
     });

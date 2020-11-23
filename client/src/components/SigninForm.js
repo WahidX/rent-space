@@ -32,7 +32,6 @@ class SigninForm extends Component {
   handleFormSubmit = (e) => {
     e.preventDefault();
 
-    console.log('SignIN submit ==== ', this.state);
     const { email, password } = this.state;
     if (email && password) {
       this.props.dispatch(signin(email, password));

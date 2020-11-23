@@ -2,10 +2,12 @@ export function getFormBody(params) {
   let formBody = [];
 
   for (let key in params) {
-    let encodedKey = encodeURIComponent(key);
-    let encodedValue = encodeURIComponent(params[key]);
+    if (params[key] !== '') {
+      let encodedKey = encodeURIComponent(key);
+      let encodedValue = encodeURIComponent(params[key]);
 
-    formBody.push(encodedKey + '=' + encodedValue);
+      formBody.push(encodedKey + '=' + encodedValue);
+    }
   }
 
   return formBody.join('&');

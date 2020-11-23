@@ -1,7 +1,20 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchProperty } from '../actions/property';
 
 class Filter extends Component {
+  handleInputChange = (key, value) => {
+    this.setState({
+      [key]: value,
+    });
+  };
+
+  handleSearch = (e) => {
+    this.props.dispatch(fetchProperty(this.state));
+  };
+
   render() {
+    console.log('STATE:: ', this.state);
     return (
       <div id="filter-main">
         <div id="filter-container">
@@ -10,8 +23,14 @@ class Filter extends Component {
               <label htmlFor="location">Location</label>
             </div>
             <div className="filter-value">
-              <select id="location" name="location">
-                <option defaultValue="none">Select</option>
+              <select
+                id="location"
+                name="location"
+                onChange={(e) =>
+                  this.handleInputChange('location', e.target.value)
+                }
+              >
+                <option defaultValue="null"></option>
                 <option defaultValue="Kolkata">Kolkata</option>
                 <option defaultValue="Chennai">Chennai</option>
                 <option defaultValue="Mumbai">Mumbai</option>
@@ -25,12 +44,18 @@ class Filter extends Component {
             <div className="filter-title">
               <label>Type</label>
             </div>
-            <div className="filter-value">
-              <input type="radio" id="rent" defaultValue="Rent" name="type" />
-              <label htmlFor="rent">Sale</label>
-              &nbsp;&nbsp;
+            <div
+              className="filter-value"
+              onClick={(e) => {
+                if (e.checked) e.checked = false;
+              }}
+              onChange={(e) => this.handleInputChange('type', e.target.value)}
+            >
               <input type="radio" id="sale" defaultValue="Sale" name="type" />
-              <label htmlFor="sale">Rent</label>
+              <label htmlFor="sale">Sale</label>
+              &nbsp;&nbsp;
+              <input type="radio" id="rent" defaultValue="Rent" name="type" />
+              <label htmlFor="rent">Rent</label>
             </div>
           </div>
 
@@ -48,7 +73,7 @@ class Filter extends Component {
               placeholder='start'
               style={{ "width": '50px' }}
               required
-            ></input>
+              onChange={(e) => this.handleInputChange('start', e.target.value)}></input>
               {/* prettier-ignore */}&nbsp;-&nbsp;
               <input
                 type="number"
@@ -58,6 +83,7 @@ class Filter extends Component {
                 placeholder="end"
                 style={{ width: '50px' }}
                 required
+                onChange={(e) => this.handleInputChange('end', e.target.value)}
               ></input>
             </div>
           </div>
@@ -66,7 +92,10 @@ class Filter extends Component {
             <div className="filter-title">
               <label>Bedrooms</label>
             </div>
-            <div className="filter-value">
+            <div
+              className="filter-value"
+              onChange={(e) => this.handleInputChange('beds', e.target.value)}
+            >
               <input type="radio" id="bed-1" defaultValue="1" name="beds" />
               <label htmlFor="bed-1">1</label>
               <input type="radio" id="bed-2" defaultValue="2" name="beds" />
@@ -82,7 +111,10 @@ class Filter extends Component {
             <div className="filter-title">
               <label>Bathrooms</label>
             </div>
-            <div className="filter-value">
+            <div
+              className="filter-value"
+              onChange={(e) => this.handleInputChange('baths', e.target.value)}
+            >
               <input type="radio" id="bath-1" defaultValue="1" name="baths" />
               <label htmlFor="bath-1">1</label>
               <input type="radio" id="bath-2" defaultValue="2" name="baths" />
@@ -94,10 +126,14 @@ class Filter extends Component {
             </div>
           </div>
         </div>
-        <button>Search</button>
+        <button onClick={this.handleSearch}>Search</button>
       </div>
     );
   }
 }
 
-export default Filter;
+function mapStateToProps(state) {
+  return {};
+}
+
+export default connect(mapStateToProps)(Filter);

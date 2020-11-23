@@ -1,16 +1,25 @@
 import { UPDATE_PROPERTY } from './actionTypes';
 import { APIurls } from '../helpers/urls';
+import { getFormBody } from '../helpers/utils';
 
-export function fetchProperty() {
+export function fetchProperty(filters) {
+  let query = '';
+  if (filters) {
+    query = getFormBody(filters);
+    console.log('FormBody: ', query);
+  }
+
   return (dispatch) => {
-    const url = APIurls.fetchProperty(1, 5);
+    const url = APIurls.fetchProperty(query);
     fetch(url)
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        console.log('DATA from API : ', data.data.properties);
-        dispatch(updateProperty(data.data.properties));
+        if (data.data) {
+          console.log('DATA from API : ', data.data.properties);
+          dispatch(updateProperty(data.data.properties));
+        }
       });
   };
 }
