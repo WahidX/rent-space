@@ -1,6 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 
 // Components
@@ -8,6 +13,24 @@ import { Header, Home, Footer, SigninForm, SignupForm, Page404 } from './index';
 // Actions
 import { fetchProperty } from '../actions/property';
 import { authenticateUser } from '../actions/auth';
+
+const Profile = () => <div>Profile PAGE</div>;
+
+const PrivateRoute = (privateRouteProps) => {
+  const { isLoggedin, path, component: Component } = privateRouteProps;
+  return (
+    <Route
+      path={path}
+      render={(props) => {
+        return isLoggedin ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/signin" />
+        );
+      }}
+    />
+  );
+};
 
 class App extends React.Component {
   componentDidMount() {
@@ -30,7 +53,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { property } = this.props;
+    const { property, auth } = this.props;
     console.log('PROPS: ', property);
 
     return (
@@ -40,6 +63,12 @@ class App extends React.Component {
 
           <Switch>
             <Route exact path="/" component={Home} />
+            <PrivateRoute
+              exact
+              path="/profile"
+              component={Profile}
+              isLoggedin={auth.isLoggedin}
+            />
             <Route exact path="/signin" component={SigninForm} />
             <Route exact path="/signup" component={SignupForm} />
             <Route component={Page404} />
@@ -55,6 +84,7 @@ class App extends React.Component {
 function mapStateToProps(state) {
   return {
     property: state.property,
+    auth: state.auth,
   };
 }
 
