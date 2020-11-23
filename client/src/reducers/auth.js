@@ -5,8 +5,8 @@ import {
   SIGNUP_START,
   SIGNUP_SUCCESS,
   SIGNUP_FAILED,
-  // AUTHENTICATE_USER,
-  // LOGOUT
+  AUTHENTICATE_USER,
+  LOGOUT,
 } from '../actions/actionTypes';
 
 const initialAuthState = {
@@ -40,18 +40,18 @@ export default function auth(state = initialAuthState, action) {
         error: action.error,
         inProgress: false,
       };
-    // case AUTHENTICATE_USER:
-    //   return {
-    //     ...state,
-    //     user: action.user,
-    //     isLoggedin: true,
-    //   };
-    // case LOGOUT:
-    //   return {
-    //     ...state,
-    //     user: {},
-    //     isLoggedin: false,
-    //   };
+    case AUTHENTICATE_USER:
+      return {
+        ...state,
+        user: action.user,
+        isLoggedin: true,
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        user: {},
+        isLoggedin: false,
+      };
     default:
       return state;
   }

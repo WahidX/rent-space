@@ -1,15 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
 
 // Components
 import { Header, Home, Footer, SigninForm, SignupForm, Page404 } from './index';
 // Actions
 import { fetchProperty } from '../actions/property';
+import { authenticateUser } from '../actions/auth';
 
 class App extends React.Component {
   componentDidMount() {
     this.props.dispatch(fetchProperty());
+
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      const user = jwt_decode(token);
+
+      console.log('user::: ', user);
+      this.props.dispatch(
+        authenticateUser({
+          email: user.email,
+          _id: user._id,
+          name: user.name,
+        })
+      );
+    }
   }
 
   render() {

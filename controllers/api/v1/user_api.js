@@ -41,10 +41,8 @@ module.exports.createUser = async function (req, res) {
         message: 'Email or Contact No already registered',
       });
     }
-    let p1 = req.body.password;
-    let p2 = req.body.confirm_password;
-    console.log(p1, p2, p1 !== p2);
-    if (p1 != p2) {
+
+    if (req.body.password !== req.body.confirm_password) {
       return res.status(422).json({
         message: "Passwords didn't match!",
       });
