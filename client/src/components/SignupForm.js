@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { signup } from '../actions/auth';
+import { Redirect } from 'react-router-dom';
+import { signup, clearAuthState } from '../actions/auth';
 
 class SignupForm extends Component {
   constructor(props) {
@@ -12,6 +13,10 @@ class SignupForm extends Component {
       confirm_password: '',
       contact: '',
     };
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(clearAuthState());
   }
 
   handleInputChange = (field, value) => {
@@ -32,7 +37,12 @@ class SignupForm extends Component {
   };
 
   render() {
-    const { error, inProgress } = this.props.auth;
+    const { error, inProgress, isLoggedin } = this.props.auth;
+
+    if (isLoggedin) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <div>
         <form className="form-container">
