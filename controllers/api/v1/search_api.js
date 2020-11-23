@@ -38,3 +38,23 @@ module.exports.searchResults = async function (req, res) {
     });
   }
 };
+
+module.exports.searchByID = async function (req, res) {
+  try {
+    let property = await Property.findById(req.params.id).populate(
+      'seller',
+      'name, contact, email'
+    );
+    return res.status(200).json({
+      message: 'Got the Property',
+      data: {
+        property,
+      },
+    });
+  } catch (err) {
+    // console.log('Err: ', err);
+    return res.status(404).json({
+      message: "Sorry, We aren't covering Mars for now.",
+    });
+  }
+};
