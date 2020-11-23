@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 // const multer = require('multer');
-const path = require("path");
+const path = require('path');
 // const AVATAR_PATH = path.join('/uploads/users/avatars');
 
 const tenantSchema = new mongoose.Schema(
@@ -25,10 +25,16 @@ const tenantSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    favourites: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Property',
+      },
+    ],
     applications: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Application",
+        ref: 'Application',
       },
     ],
   },
@@ -52,6 +58,6 @@ const tenantSchema = new mongoose.Schema(
 // );
 // userSchema.statics.avatarPath = AVATAR_PATH;
 
-const Tenant = mongoose.model("Tenant", tenantSchema);
+const Tenant = mongoose.model('Tenant', tenantSchema);
 
 module.exports = Tenant;
