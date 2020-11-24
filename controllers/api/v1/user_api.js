@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../../../models/tenant');
 const env = require('../../../config/environment');
+const Property = require('../../../models/property');
 
 module.exports.createSession = async function (req, res) {
   try {
@@ -21,7 +22,9 @@ module.exports.createSession = async function (req, res) {
       success: true,
       data: {
         user,
-        token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: '10000' }),
+        token: jwt.sign(user.toJSON(), env.jwt_secret, {
+          expiresIn: '10000000',
+        }),
       },
     });
   } catch (err) {
@@ -69,6 +72,62 @@ module.exports.createUser = async function (req, res) {
     console.log('Err:  ', err);
     return res.status(500).json({
       message: 'Internal Server Error',
+    });
+  }
+};
+
+module.exports.toggleFavourite = async function (req, res) {
+  try {
+    //check if id is valid
+    let property = await Property.findById(req.params.id);
+    if (!property) {
+      return res.status(404).json({
+        message: 'Invalid request',
+      });
+    }
+
+    let index = req.user.favourites.indexOf(req.params.id);
+    let message = '';
+    if (index === -1) {
+      message = 'Added to favourites';
+      req.user.favourites.push(req.params.id);
+    } else {
+      message = 'Removed from favourites';
+      req.user.favourites.splice(index, 1);
+    }
+    req.user.save();
+
+    return res.status(200).json({
+      message,
+      success: true,
+      data: {
+        favourites: req.user.favourites,
+      },
+    });
+  } catch (err) {
+    console.log('Err: ', err);
+    return res.status(404).json({
+      message: 'Invalid Request',
+    });
+  }
+};
+
+module.exports.getFavourites = async function (req, res) {
+  try {
+    req.user = await User.findById(req.user._id).populate({
+      path: 'favourites',
+    });
+
+    return res.status(200).json({
+      message: 'Have your Favourites',
+      data: {
+        favourites: req.user.favourites,
+      },
+    });
+  } catch (err) {
+    console.log('Err: ', err);
+    return res.status(404).json({
+      message: 'Invalid Request',
     });
   }
 };

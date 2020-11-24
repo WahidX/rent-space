@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class PropertyCard extends Component {
   render() {
@@ -47,22 +48,23 @@ class PropertyCard extends Component {
             <div className="details-item">
               For {property.type}
               <br />₹
-              <b>{property.type == 'Sale' ? property.price : property.rent}</b>k
+              <b>{property.type === 'Sale' ? property.price : property.rent}</b>
+              k
             </div>
           </div>
 
           <div className="card-btn-container">
-            <button>
+            <button className="normal">
               View
               <br />
               Property
             </button>
-            <button>
+            <button className="gold">
               Add to
               <br />
-              Favourite
+              Favourites
             </button>
-            <button>
+            <button className="warning">
               Apply
               <br />
               Now
@@ -74,4 +76,10 @@ class PropertyCard extends Component {
   }
 }
 
-export default PropertyCard;
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+  };
+}
+
+export default connect(mapStateToProps)(PropertyCard);

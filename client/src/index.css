@@ -193,7 +193,7 @@ button {
   background-color: rgb(133, 176, 255);
   width: 30%;
   max-width: 310px;
-  min-width: 280px;
+  min-width: 290px;
   height: 365px;
   margin: 20px;
   padding: 6px;
@@ -234,7 +234,7 @@ button {
 }
 
 .property-item .details-container .details-item img {
-  width: 15px;
+  width: 20px;
   height: 15px;
 }
 
@@ -248,6 +248,37 @@ button {
 #property-container .property-item .card-btn-container * {
   margin: 5px;
   border-radius: 3px;
+}
+
+/* BUTTONS */
+.warning {
+  border: 1px solid #dc3545;
+  color: #dc3545;
+}
+
+.warning:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+.normal {
+  border: 1px solid rgb(0, 175, 0);
+  color: rgb(0, 175, 0);
+}
+
+.normal:hover {
+  background-color: rgb(0, 175, 0);
+  color: white;
+}
+
+.gold {
+  border: 1px solid rgb(167, 142, 0);
+  color: rgb(155, 131, 0);
+}
+
+.gold:hover {
+  background-color: rgb(175, 149, 0);
+  color: white;
 }
 
 /* Footer */
