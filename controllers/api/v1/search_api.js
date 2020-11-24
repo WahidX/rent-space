@@ -11,14 +11,24 @@ module.exports.searchResults = async function (req, res) {
       typeof req.query.start !== 'undefined' ||
       typeof req.query.end !== 'undefined'
     ) {
-      req.query.price = {};
+      let obj = {};
       if (typeof req.query.start !== 'undefined') {
-        req.query.price.$gt = req.query.start - 0.01;
+        obj.$gt = req.query.start - 0.01;
         delete req.query.start;
       }
       if (typeof req.query.end !== 'undefined') {
-        req.query.price.$lt = Number(req.query.end) + 0.01;
+        obj.$lt = Number(req.query.end) + 0.01;
         delete req.query.end;
+      }
+      if (req.query.type === 'undefined') {
+        req.query.price = obj;
+        req.query.rent = obj;
+      } else {
+        if (req.query.type === 'Sale') {
+          req.query.price = obj;
+        } else {
+          req.query.rent = obj;
+        }
       }
     }
 
