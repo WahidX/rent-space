@@ -3,20 +3,33 @@ import { connect } from 'react-redux';
 import { fetchProperty } from '../actions/property';
 
 class Filter extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.baseState = this.state;
+  }
+
   handleInputChange = (key, value) => {
     this.setState({
       [key]: value,
     });
   };
 
+  handleClear = (e) => {
+    // e.preventDefault();
+    console.log(this.baseState);
+    this.setState(this.baseState);
+  };
+
   handleSearch = (e) => {
+    e.preventDefault();
     this.props.dispatch(fetchProperty(this.state));
   };
 
   render() {
     console.log('STATE:: ', this.state);
     return (
-      <div id="filter-main">
+      <form id="filter-main">
         <div id="filter-container">
           <div className="filter-item">
             <div className="filter-title">
@@ -72,7 +85,6 @@ class Filter extends Component {
               name="start"
               placeholder='start'
               style={{ "width": '50px' }}
-              required
               onChange={(e) => this.handleInputChange('start', e.target.value)}></input>
               {/* prettier-ignore */}&nbsp;-&nbsp;
               <input
@@ -82,7 +94,6 @@ class Filter extends Component {
                 name="end"
                 placeholder="end"
                 style={{ width: '50px' }}
-                required
                 onChange={(e) => this.handleInputChange('end', e.target.value)}
               ></input>
             </div>
@@ -126,8 +137,15 @@ class Filter extends Component {
             </div>
           </div>
         </div>
-        <button onClick={this.handleSearch}>Search</button>
-      </div>
+        <div id="filter-btns">
+          <button defaultValue="submit" onClick={this.handleSearch}>
+            Search
+          </button>
+          <button defaultValue="Reset" onClick={this.handleClear}>
+            Clear All
+          </button>
+        </div>
+      </form>
     );
   }
 }

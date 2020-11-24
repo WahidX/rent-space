@@ -7,6 +7,7 @@ import Home from './Home';
 import SigninForm from './SigninForm';
 import SignupForm from './SignupForm';
 import Page404 from './Page404';
+import PropertyCard from './PropertyCard';
 
 export {
   App,
@@ -18,4 +19,5 @@ export {
   SigninForm,
   SignupForm,
   Page404,
+  PropertyCard,
 };

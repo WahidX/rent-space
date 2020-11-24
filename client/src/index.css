@@ -158,3 +158,84 @@ button {
 .filter-value input[type='radio'] {
   display: none;
 }
+
+#filter-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 0px 20px 0px 20px;
+}
+
+#filter-btns * {
+  margin: 20px;
+}
+
+/* PROPERTYLIST */
+#property-container {
+  height: auto;
+  width: 100%;
+  margin: auto;
+  padding: 20px;
+  display: flex;
+  border-radius: 30px;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+#property-container .property-item {
+  background-color: #b8d5f0;
+  width: 30%;
+  min-width: 300px;
+  height: 350px;
+  margin: 20px;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid rgb(141, 141, 255);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+}
+
+#property-container .property-item img {
+  margin: auto;
+  border-radius: 10px;
+}
+#property-container .property-item .card-title {
+  margin: auto;
+  padding: 6px 6px 0px 6px;
+  font-size: 1.5rem;
+}
+
+.property-item .details-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.property-item .details-container .details-item {
+  padding: 10px;
+  margin: auto;
+}
+
+.property-item img {
+  width: 100%;
+  border-radius: 50px;
+  margin-bottom: 10px;
+}
+
+.property-item .details-container .details-item img {
+  width: 15px;
+  height: 15px;
+}
+
+#property-container .property-item .card-btn-container {
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+#property-container .property-item .card-btn-container * {
+  margin: 5px;
+  border-radius: 3px;
+}
