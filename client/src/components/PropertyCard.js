@@ -11,7 +11,11 @@ class PropertyCard extends Component {
             src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.wrGDCtxJc2rb9rgfGaQSCwHaE7%26pid%3DApi&amp;f=1"
           />
 
-          <span className="card-title">{property.title}</span>
+          <span className="card-title">
+            {property.title.length > 70
+              ? property.title.slice(0, 70) + '...'
+              : property.title}
+          </span>
 
           <div className="details-container">
             <div className="details-item">
@@ -24,7 +28,7 @@ class PropertyCard extends Component {
 
             <div className="details-item">
               <img
-                src="https://www.flaticon.com/svg/static/icons/svg/2863/2863197.svg"
+                src="https://www.flaticon.com/svg/static/icons/svg/632/632339.svg"
                 alt="bedrooms"
               />
               &nbsp;

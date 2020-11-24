@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(195, 212, 245);
 }
 
 code {
@@ -19,7 +20,7 @@ code {
   justify-content: space-between;
   margin-bottom: 10px;
   padding: 10px;
-  background-color: cornflowerblue;
+  background-color: rgb(79, 134, 236);
   box-shadow: 0px 0px 10px 0px #000000;
   font-size: 1.4rem;
 }
@@ -55,7 +56,9 @@ code {
 
 /* Sign-in/ Sign-up Form */
 .form-container {
+  font-size: 1.5rem;
   margin: auto;
+  margin-top: 80px;
   width: 30%;
   min-width: 250px;
   max-width: 500px;
@@ -104,19 +107,22 @@ button {
   border-radius: 15px;
 }
 .form-container a:hover {
-  box-shadow: 0px 0px 5px 0px #1c6b99;
-  background-color: rgb(136, 168, 228);
+  box-shadow: 0px 0px 10px 0px #1c6b99;
+  background-color: rgb(142, 181, 255);
 }
 
 /* FILTER */
 #filter-main {
   margin: auto;
-  width: 90%;
+  width: 95%;
   display: flex;
   flex-direction: column;
   border-radius: 3px;
-  box-shadow: 1px 0px 5px 0px #808080;
+  margin-top: 40px;
   padding-bottom: 20px;
+  border: 1px solid rgb(141, 141, 255);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
+  background-color: rgb(133, 176, 255);
 }
 
 #filter-container {
@@ -130,6 +136,7 @@ button {
 }
 
 .filter-item {
+  font-size: 1.2rem;
   margin: 10px;
   display: flex;
   flex-direction: column;
@@ -173,7 +180,6 @@ button {
 /* PROPERTYLIST */
 #property-container {
   height: auto;
-  width: 100%;
   margin: auto;
   padding: 20px;
   display: flex;
@@ -184,11 +190,11 @@ button {
 }
 
 #property-container .property-item {
-  background-color: #b8d5f0;
+  background-color: rgb(133, 176, 255);
   width: 30%;
   max-width: 310px;
   min-width: 280px;
-  height: 350px;
+  height: 365px;
   margin: 20px;
   padding: 6px;
   border-radius: 6px;
@@ -202,10 +208,11 @@ button {
   margin: auto;
   border-radius: 10px;
 }
+
 #property-container .property-item .card-title {
   margin: auto;
   padding: 6px 6px 0px 6px;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
 }
 
 .property-item .details-container {
@@ -237,7 +244,23 @@ button {
   flex-direction: row;
   justify-content: space-evenly;
 }
+
 #property-container .property-item .card-btn-container * {
   margin: 5px;
   border-radius: 3px;
+}
+
+/* Footer */
+footer {
+  margin: 100px 0px 0px 0px;
+  padding: 40px 0px 30px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  background-color: rgb(133, 133, 133);
+}
+
+footer * {
+  font-size: 1.1rem;
+  text-decoration: none;
 }
