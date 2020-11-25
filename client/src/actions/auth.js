@@ -46,7 +46,7 @@ export function signin(email, password) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log('LOGIN data: ', data);
 
         if (data.success) {
           // action to save user

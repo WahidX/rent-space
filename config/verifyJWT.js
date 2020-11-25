@@ -12,7 +12,9 @@ module.exports = async function (req, res, next) {
   try {
     // Verifying the token
     const verified = jwt.verify(token, env.jwt_secret);
-    let user = await User.findById(verified._id);
+    let user = await User.findById(verified._id)
+      .populate({ path: 'favourites' })
+      .populate({ path: 'applied' });
     if (user) {
       req.user = user;
       next();

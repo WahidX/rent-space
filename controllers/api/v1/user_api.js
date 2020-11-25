@@ -6,7 +6,9 @@ const Property = require('../../../models/property');
 
 module.exports.createSession = async function (req, res) {
   try {
-    let user = await User.findOne({ email: req.body.email });
+    let user = await User.findOne({ email: req.body.email })
+      .populate({ path: 'favourites' })
+      .populate({ path: 'applied' });
 
     if (user) {
       let isMatch = await bcrypt.compare(req.body.password, user.password);
@@ -86,11 +88,20 @@ module.exports.toggleFavourite = async function (req, res) {
       });
     }
 
-    let index = req.user.favourites.indexOf(req.params.id);
+    let index = -1;
+    let favourites = req.user.favourites;
+
+    for (i = 0; i < favourites.length; i++) {
+      if (favourites[i].id === property.id) {
+        index = i;
+        break;
+      }
+    }
+
     let message = '';
     if (index === -1) {
       message = 'Added to favourites';
-      req.user.favourites.push(req.params.id);
+      req.user.favourites.push(property);
     } else {
       message = 'Removed from favourites';
       req.user.favourites.splice(index, 1);

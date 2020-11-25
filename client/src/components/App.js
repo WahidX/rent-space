@@ -47,6 +47,9 @@ class App extends React.Component {
           email: user.email,
           _id: user._id,
           name: user.name,
+          favourites: user.favourites,
+          applied: user.applied,
+          contact: user.contact,
         })
       );
     }
@@ -83,7 +86,7 @@ class App extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    property: state.property,
+    property: state.property.property,
     auth: state.auth,
   };
 }

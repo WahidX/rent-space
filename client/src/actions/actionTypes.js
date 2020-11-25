@@ -1,4 +1,5 @@
 export const UPDATE_PROPERTY = 'UPDATE_PROPERTY';
+export const UPDATE_MODE = 'UPDATE_MODE';
 
 // login actions
 export const LOGIN_START = 'LOGIN_START';

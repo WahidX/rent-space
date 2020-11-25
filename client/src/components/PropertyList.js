@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import { PropertyCard } from './';
 
 class PropertyList extends Component {
   render() {
-    const { properties } = this.props;
+    console.log('helu', this.props);
+    let properties = this.props.property.properties;
+
+    if (this.props.property.mode === 'home') {
+      properties = this.props.property.properties;
+    } else if (this.props.property.mode === 'favourite') {
+      properties = this.props.favourites;
+    } else {
+      properties = this.props.applied;
+    }
 
     console.log('LIST : ', properties);
 
@@ -20,7 +30,9 @@ class PropertyList extends Component {
 
 function mapStateToProps(state) {
   return {
-    properties: state.property,
+    property: state.property,
+    favourites: state.auth.user.favourites,
+    applied: state.auth.user.applied,
   };
 }
 
