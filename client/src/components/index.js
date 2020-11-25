@@ -8,7 +8,6 @@ import SigninForm from './SigninForm';
 import SignupForm from './SignupForm';
 import Page404 from './Page404';
 import PropertyCard from './PropertyCard';
-import Favourite from './Favourite';
 
 export {
   App,
@@ -21,5 +20,4 @@ export {
   SignupForm,
   Page404,
   PropertyCard,
-  Favourite,
 };

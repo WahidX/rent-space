@@ -6,6 +6,7 @@ export function fetchProperty(filters) {
   let query = '';
   if (filters) {
     query = getFormBody(filters);
+    console.log('FormBody: ', query);
   }
 
   return (dispatch) => {
@@ -27,27 +28,5 @@ export function updateProperty(property) {
   return {
     type: UPDATE_PROPERTY,
     property,
-  };
-}
-
-export function fetchFavourites() {
-  const url = APIurls.fetchFavourites();
-  const authToken = localStorage.getItem('token');
-  return (dispatch) => {
-    fetch(url, {
-      method: 'GET',
-      headers: {
-        Authorization: authToken,
-      },
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        if (data.data) {
-          console.log('DATA from API : ', data.data.favourites);
-          dispatch(updateProperty(data.data.favourites));
-        }
-      });
   };
 }

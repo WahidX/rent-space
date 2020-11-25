@@ -12,7 +12,8 @@ router.post('/create-user', userAPI.createUser);
 router.get('/toggle-fav/:id', verifyJWT, userAPI.toggleFavourite);
 router.get('/favs', verifyJWT, userAPI.getFavourites);
 
-// router.get('/toggle-apply/:id', )
+// router.get('/apply', )
+// router.get('/rm-apply', )
 // router.get('/applied', )
 
 module.exports = router;
