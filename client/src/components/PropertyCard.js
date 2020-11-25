@@ -4,12 +4,29 @@ import { connect } from 'react-redux';
 import { fetchToggleFavourite } from '../actions/property';
 
 class PropertyCard extends Component {
-  handleFavouriteToggle = () => {
+  handleFavouriteToggle = (e) => {
     this.props.dispatch(fetchToggleFavourite(this.props.property._id));
   };
 
   render() {
     let { property } = this.props;
+    let flagFav = false;
+    let flagApplied = false;
+
+    for (let i = 0; i < this.props.favourites.length; i++) {
+      if (this.props.favourites[i]._id === property._id) {
+        flagFav = true;
+        break;
+      }
+    }
+
+    for (let i = 0; i < this.props.applied.length; i++) {
+      if (this.props.applied[i]._id === property._id) {
+        flagApplied = true;
+        break;
+      }
+    }
+
     return (
       <React.Fragment>
         <div className="property-item" id="property-{property._id}">
@@ -66,12 +83,14 @@ class PropertyCard extends Component {
               Property
             </button>
             <button className="gold" onClick={this.handleFavouriteToggle}>
-              Add to
+              {!flagFav && 'Add to'}
+              {flagFav && 'Remove from'}
               <br />
               Favourites
             </button>
             <button className="warning">
-              Apply
+              {!flagApplied && 'Apply'}
+              {flagApplied && 'Cancel'}
               <br />
               Now
             </button>
@@ -84,7 +103,8 @@ class PropertyCard extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.auth.user,
+    favourites: state.auth.user.favourites,
+    applied: state.auth.user.applied,
   };
 }
 
