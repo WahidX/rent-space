@@ -1,4 +1,4 @@
-import { UPDATE_PROPERTY } from './actionTypes';
+import { UPDATE_MODE, UPDATE_PROPERTY } from './actionTypes';
 import { APIurls } from '../helpers/urls';
 import { getFormBody } from '../helpers/utils';
 
@@ -28,5 +28,12 @@ export function updateProperty(property) {
   return {
     type: UPDATE_PROPERTY,
     property,
+  };
+}
+
+export function changeMode(mode) {
+  return {
+    type: UPDATE_MODE,
+    mode,
   };
 }

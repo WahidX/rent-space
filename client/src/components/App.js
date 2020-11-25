@@ -9,9 +9,18 @@ import {
 import jwt_decode from 'jwt-decode';
 
 // Components
-import { Header, Home, Footer, SigninForm, SignupForm, Page404 } from './index';
+import {
+  Header,
+  Home,
+  Footer,
+  SigninForm,
+  SignupForm,
+  Page404,
+  Favourite,
+  Applied,
+} from './index';
 // Actions
-import { fetchProperty } from '../actions/property';
+import { fetchProperty, changeMode } from '../actions/property';
 import { authenticateUser } from '../actions/auth';
 
 const Profile = () => <div>Profile PAGE</div>;
@@ -33,11 +42,17 @@ const PrivateRoute = (privateRouteProps) => {
 };
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props.dispatch(changeMode('home'));
+  }
+  componentWillUnmount() {
+    console.log('unmount');
+  }
   componentDidMount() {
+    this.props.dispatch(changeMode('home'));
     this.props.dispatch(fetchProperty());
-
     const token = localStorage.getItem('token');
-
     if (token) {
       const user = jwt_decode(token);
 
@@ -70,6 +85,18 @@ class App extends React.Component {
               exact
               path="/profile"
               component={Profile}
+              isLoggedin={auth.isLoggedin}
+            />
+            <PrivateRoute
+              exact
+              path="/favourite"
+              component={Favourite}
+              isLoggedin={auth.isLoggedin}
+            />
+            <PrivateRoute
+              exact
+              path="/applied"
+              component={Applied}
               isLoggedin={auth.isLoggedin}
             />
             <Route exact path="/signin" component={SigninForm} />

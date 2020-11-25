@@ -22,7 +22,7 @@ class Header extends Component {
 
         <div id="tabs-container">
           <Link to="/favourite">Favourite</Link>
-          <Link to="/favourite">Applied</Link>
+          <Link to="/applied">Applied</Link>
         </div>
 
         {auth.isLoggedin ? (
