@@ -9,7 +9,15 @@ import {
 import jwt_decode from 'jwt-decode';
 
 // Components
-import { Header, Home, Footer, SigninForm, SignupForm, Page404 } from './index';
+import {
+  Header,
+  Home,
+  Footer,
+  SigninForm,
+  SignupForm,
+  Page404,
+  Favourite,
+} from './index';
 // Actions
 import { fetchProperty } from '../actions/property';
 import { authenticateUser } from '../actions/auth';
@@ -67,6 +75,12 @@ class App extends React.Component {
               exact
               path="/profile"
               component={Profile}
+              isLoggedin={auth.isLoggedin}
+            />
+            <PrivateRoute
+              exact
+              path="/favourite"
+              component={Favourite}
               isLoggedin={auth.isLoggedin}
             />
             <Route exact path="/signin" component={SigninForm} />

@@ -6,7 +6,7 @@ class PropertyList extends Component {
   render() {
     const { properties } = this.props;
 
-    console.log('LIST : ', properties);
+    console.log('Inside PropLIST : ', properties);
 
     return (
       <div id="property-container">
