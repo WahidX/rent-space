@@ -68,6 +68,9 @@ module.exports.createUser = async function (req, res) {
       success: true,
       data: {
         user: newUser,
+        token: jwt.sign(newUser.toJSON(), env.jwt_secret, {
+          expiresIn: '10000000',
+        }),
       },
     });
   } catch (err) {

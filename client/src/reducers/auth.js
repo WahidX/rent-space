@@ -8,6 +8,7 @@ import {
   AUTHENTICATE_USER,
   LOGOUT,
   CLEAR_AUTH_STATE,
+  TOGGLE_FAVOURITE,
 } from '../actions/actionTypes';
 
 const initialAuthState = {
@@ -57,6 +58,14 @@ export default function auth(state = initialAuthState, action) {
       return {
         ...state,
         error: null,
+      };
+    case TOGGLE_FAVOURITE:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          favourites: action.favourites,
+        },
       };
     default:
       return state;

@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { fetchToggleFavourite } from '../actions/property';
+
 class PropertyCard extends Component {
+  handleFavouriteToggle = () => {
+    this.props.dispatch(fetchToggleFavourite(this.props.property._id));
+  };
+
   render() {
     let { property } = this.props;
     return (
@@ -59,7 +65,7 @@ class PropertyCard extends Component {
               <br />
               Property
             </button>
-            <button className="gold">
+            <button className="gold" onClick={this.handleFavouriteToggle}>
               Add to
               <br />
               Favourites
@@ -78,7 +84,7 @@ class PropertyCard extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.user,
+    user: state.auth.user,
   };
 }
 
