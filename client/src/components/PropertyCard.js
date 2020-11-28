@@ -13,17 +13,20 @@ class PropertyCard extends Component {
     let flagFav = false;
     let flagApplied = false;
 
-    for (let i = 0; i < this.props.favourites.length; i++) {
-      if (this.props.favourites[i]._id === property._id) {
-        flagFav = true;
-        break;
+    if (this.props.favourites) {
+      for (let i = 0; i < this.props.favourites.length; i++) {
+        if (this.props.favourites[i]._id === property._id) {
+          flagFav = true;
+          break;
+        }
       }
     }
-
-    for (let i = 0; i < this.props.applied.length; i++) {
-      if (this.props.applied[i]._id === property._id) {
-        flagApplied = true;
-        break;
+    if (this.props.applied) {
+      for (let i = 0; i < this.props.applied.length; i++) {
+        if (this.props.applied[i]._id === property._id) {
+          flagApplied = true;
+          break;
+        }
       }
     }
 

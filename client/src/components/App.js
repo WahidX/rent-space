@@ -18,12 +18,11 @@ import {
   Page404,
   Favourite,
   Applied,
+  Profile,
 } from './index';
 // Actions
 import { fetchProperty, changeMode } from '../actions/property';
 import { authenticateUser } from '../actions/auth';
-
-const Profile = () => <div>Profile PAGE</div>;
 
 const PrivateRoute = (privateRouteProps) => {
   const { isLoggedin, path, component: Component } = privateRouteProps;

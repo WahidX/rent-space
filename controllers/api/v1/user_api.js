@@ -1,8 +1,16 @@
+// module imports
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+
+// File imports
+const AVATAR_PATH = path.join('/uploads/users/avatars');
 const User = require('../../../models/tenant');
 const env = require('../../../config/environment');
 const Property = require('../../../models/property');
+const Application = require('../../../models/application');
 
 module.exports.createSession = async function (req, res) {
   try {
@@ -142,6 +150,107 @@ module.exports.getFavourites = async function (req, res) {
     console.log('Err: ', err);
     return res.status(404).json({
       message: 'Invalid Request',
+    });
+  }
+};
+
+module.exports.toggleApply = async function (req, res) {
+  try {
+    //check if id is valid
+    let property = await Property.findById(req.params.id);
+    if (!property) {
+      return res.status(404).json({
+        message: 'Invalid request',
+      });
+    }
+
+    let index = -1;
+    let applied = req.user.applied;
+
+    for (i = 0; i < applied.length; i++) {
+      if (applied[i].id === property.id) {
+        index = i;
+        break;
+      }
+    }
+
+    let message = '';
+    if (index === -1) {
+      message = 'Applied for the property';
+      req.user.applied.push(property);
+
+      // Adding in Application model
+      let application = await Application.create({
+        property: property.id,
+        seller: property.seller,
+        tenant: req.user.id,
+        status: 'Pending',
+      });
+      // Should send a mail to seller
+    } else {
+      req.user.applied.splice(index, 1);
+
+      let application = await Application.find({
+        tenant: req.user.id,
+        property: property.id,
+      });
+
+      application.remove();
+    }
+    req.user.save();
+
+    return res.status(200).json({
+      message,
+      success: true,
+      data: {
+        applied: req.user.applied,
+      },
+    });
+  } catch (err) {
+    console.log('Err: ', err);
+    return res.status(404).json({
+      message: 'Invalid Request',
+    });
+  }
+};
+
+module.exports.updateProfile = async function (req, res) {
+  if (req.user.id === req.params.id) {
+    try {
+      let user = await User.findById(req.params.id);
+      User.uploadedAvatar(req, res, function (err) {
+        if (err) {
+          console.log('*Multer Error*', err);
+        }
+
+        user.name = req.body.name;
+        user.email = req.body.email;
+        user.contact = req.body.contact;
+
+        // checking if there's a file in req
+        if (req.file) {
+          // checking if user already has an avatar if yes deleting it
+          if (fs.existsSync(path.join(__dirname, '../../../', user.avatar))) {
+            fs.unlinkSync(path.join(__dirname, '../../../', user.avatar));
+          }
+
+          user.avatar = User.avatarPath + '/' + req.file.filename;
+        }
+        user.save();
+        return res.status(200).json({
+          message: 'Upload successful!',
+          success: true,
+        });
+      });
+    } catch (err) {
+      console.log('Err: ', err);
+      return res.status(404).json({
+        message: 'Invalid Request',
+      });
+    }
+  } else {
+    return res.status(404).json({
+      message: 'Else',
     });
   }
 };

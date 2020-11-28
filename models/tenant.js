@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-// const multer = require('multer');
+const multer = require('multer');
 const path = require('path');
-// const AVATAR_PATH = path.join('/uploads/users/avatars');
+const AVATAR_PATH = path.join('/uploads/users/avatars');
 
 const tenantSchema = new mongoose.Schema(
   {
@@ -43,20 +43,20 @@ const tenantSchema = new mongoose.Schema(
   }
 );
 
-// var storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, path.join(__dirname, "..", AVATAR_PATH));
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, file.fieldname + "-" + Date.now());
-//   },
-// });
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, '..', AVATAR_PATH));
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now());
+  },
+});
 
 // static vars
-// userSchema.statics.uploadedAvatar = multer({ storage: storage }).single(
-//   "avatar"
-// );
-// userSchema.statics.avatarPath = AVATAR_PATH;
+tenantSchema.statics.uploadedAvatar = multer({ storage: storage }).single(
+  'avatar'
+);
+tenantSchema.statics.avatarPath = AVATAR_PATH;
 
 const Tenant = mongoose.model('Tenant', tenantSchema);
 

@@ -10,6 +10,7 @@ import Page404 from './Page404';
 import PropertyCard from './PropertyCard';
 import Favourite from './Favourite';
 import Applied from './Applied';
+import Profile from './Profile';
 
 export {
   App,
@@ -24,4 +25,5 @@ export {
   PropertyCard,
   Favourite,
   Applied,
+  Profile,
 };

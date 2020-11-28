@@ -8,6 +8,7 @@ const { verify } = require('jsonwebtoken');
 router.post('/create-session', userAPI.createSession);
 router.post('/create-user', userAPI.createUser);
 // router.get('/profile/:id', userDetails);
+router.post('/update/:id', verifyJWT, userAPI.updateProfile);
 
 router.get('/toggle-fav/:id', verifyJWT, userAPI.toggleFavourite);
 router.get('/favs', verifyJWT, userAPI.getFavourites);
