@@ -27,7 +27,10 @@ class Header extends Component {
 
         {auth.isLoggedin ? (
           <div id="profile-links">
-            <Link to="/profile">{auth.user.name}</Link>
+            <Link to="/profile">
+              <img src={this.props.auth.user.avatar} alt="user" />
+              <small> {auth.user.name}</small>
+            </Link>
             <button onClick={this.logOut}>Logout</button>
           </div>
         ) : (

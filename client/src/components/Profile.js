@@ -53,7 +53,7 @@ class Profile extends Component {
     return (
       <div id="profile-container">
         <form className="form-container">
-          <img src={this.state.imageSrc} alt="user" />
+          <img src={this.props.auth.user.avatar} alt="user" />
 
           {error && <span className="form-error">{error}</span>}
 

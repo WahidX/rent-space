@@ -55,12 +55,12 @@ class App extends React.Component {
     if (token) {
       const user = jwt_decode(token);
 
-      console.log('user::: ', user);
       this.props.dispatch(
         authenticateUser({
           email: user.email,
           _id: user._id,
           name: user.name,
+          avatar: user.avatar,
           favourites: user.favourites,
           applied: user.applied,
           contact: user.contact,

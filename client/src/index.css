@@ -45,9 +45,29 @@ code {
   color: blue;
 }
 
-#profile-links * {
-  padding: 6px;
-  margin-right: 6px;
+#profile-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
+#profile-links a {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  margin-right: 10px;
+}
+
+#profile-links a * {
+  margin: auto;
+}
+
+#profile-links a img {
+  margin: auto;
+  margin-right: 10px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
 }
 
 #profile-links *:hover {
@@ -92,7 +112,7 @@ code {
   margin-bottom: 10px;
   border-radius: 50%;
   width: 70%;
-  height: 70%;
+  /* height: 75%; */
 }
 
 .form-container input,
