@@ -218,7 +218,8 @@ module.exports.updateProfile = async function (req, res) {
   if (req.user.id === req.params.id) {
     try {
       let user = await User.findById(req.params.id);
-      User.uploadedAvatar(req, res, function (err) {
+
+      User.uploadedAvatar(req, res, async function (err) {
         if (err) {
           console.log('*Multer Error*', err);
         }
@@ -237,9 +238,18 @@ module.exports.updateProfile = async function (req, res) {
           user.avatar = User.avatarPath + '/' + req.file.filename;
         }
         user.save();
+
+        // Getting user's all data
+        user = await User.findById(user._id)
+          .populate({ path: 'favourites' })
+          .populate({ path: 'applied' });
+
         return res.status(200).json({
           message: 'Upload successful!',
           success: true,
+          data: {
+            user,
+          },
         });
       });
     } catch (err) {

@@ -57,6 +57,7 @@ export default function auth(state = initialAuthState, action) {
     case CLEAR_AUTH_STATE:
       return {
         ...state,
+        inProgress: false,
         error: null,
       };
     case TOGGLE_FAVOURITE:

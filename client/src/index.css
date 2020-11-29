@@ -58,7 +58,7 @@ code {
 .form-container {
   font-size: 1.5rem;
   margin: auto;
-  margin-top: 80px;
+  margin-top: 40px;
   width: 30%;
   min-width: 250px;
   max-width: 500px;
@@ -84,6 +84,15 @@ code {
 .form-container .form-title {
   margin: auto;
   padding: 2px 0px 15px 0px;
+}
+
+.form-container img {
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  width: 70%;
+  height: 70%;
 }
 
 .form-container input,

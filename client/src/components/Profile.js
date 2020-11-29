@@ -1,25 +1,122 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { clearAuthState, updateProfileAPI } from '../actions/auth';
 
-function Profile(props) {
-  return (
-    <div className="form-container">
-      Profile Page:
-      <form action="#" method="POST" enctype="multipart/form-data">
-        <div class="form-group">
-          <label>Name</label>
-          <input class="form-control" type="text" />
-          <label>Email</label>
-          <input type="text" />
-          <label>Contact No</label>
-          <input type="number" />
-          <label>Profile Picture</label>
-          <input type="file" />
-          <input type="submit" />
-          Submit
-        </div>
-      </form>
-    </div>
-  );
+class Profile extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: this.props.auth.user.name,
+      email: this.props.auth.user.email,
+      contact: this.props.auth.user.contact,
+      avatar: null,
+      imageSrc: this.props.auth.user.avatar,
+    };
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(clearAuthState());
+  }
+
+  handleInputChange = (field, value) => {
+    this.setState({
+      [field]: value,
+    });
+  };
+
+  handleFormSubmit = (e) => {
+    e.preventDefault();
+    console.log('STATE: ', this.state);
+    const { email, name, contact, avatar } = this.state;
+    const fd = new FormData();
+    if (avatar !== null) {
+      fd.append('avatar', avatar, avatar.name);
+    }
+    fd.append('name', name);
+    fd.append('email', email);
+    fd.append('contact', contact);
+    this.props.dispatch(updateProfileAPI(this.props.auth.user._id, fd));
+
+    // if (email && name && contact) {
+    //   this.props.dispatch(signup(name, email, contact));
+    // }
+  };
+
+  render() {
+    const { error, inProgress, isLoggedin } = this.props.auth;
+
+    if (!isLoggedin) {
+      return <Redirect to="/" />;
+    }
+
+    return (
+      <div id="profile-container">
+        <form className="form-container">
+          <img src={this.state.imageSrc} alt="user" />
+
+          {error && <span className="form-error">{error}</span>}
+
+          <input
+            type="file"
+            name="avatar"
+            onChange={(e) =>
+              this.handleInputChange('avatar', e.target.files[0])
+            }
+          ></input>
+          <br></br>
+
+          <input
+            type="text"
+            name="name"
+            value={this.state.name}
+            onChange={(e) => this.handleInputChange('name', e.target.value)}
+          ></input>
+          <br></br>
+
+          <input
+            type="text"
+            name="email"
+            value={this.state.email}
+            onChange={(e) => this.handleInputChange('email', e.target.value)}
+          ></input>
+          <br></br>
+
+          <input
+            type="number"
+            name="contact"
+            value={this.state.contact}
+            onChange={(e) => this.handleInputChange('contact', e.target.value)}
+          ></input>
+          <br></br>
+
+          {inProgress ? (
+            <button
+              type="submit"
+              onClick={this.handleFormSubmit}
+              disabled={inProgress}
+            >
+              Signing up...
+            </button>
+          ) : (
+            <button
+              type="submit"
+              onClick={this.handleFormSubmit}
+              disabled={inProgress}
+            >
+              Update
+            </button>
+          )}
+        </form>
+      </div>
+    );
+  }
 }
 
-export default Profile;
+function mapStateToProps(state) {
+  return {
+    auth: state.auth,
+  };
+}
+
+export default connect(mapStateToProps)(Profile);

@@ -10,8 +10,9 @@ import {
   CLEAR_AUTH_STATE,
 } from './actionTypes';
 
-import { APIurls } from '../helpers/urls';
+import { APIurls, SERVER_ROOT } from '../helpers/urls';
 import { getFormBody } from '../helpers/utils';
+import axios from 'axios';
 
 export function startLogin() {
   return {
@@ -122,5 +123,39 @@ export function logoutUser() {
 export function clearAuthState() {
   return {
     type: CLEAR_AUTH_STATE,
+  };
+}
+
+export function updateProfileAPI(id, formData) {
+  return (dispatch) => {
+    //disabling the submit button
+    dispatch(startSignup());
+
+    const _url = APIurls.updateProfile(id);
+    const token = localStorage.getItem('token');
+    var data = formData;
+    var config = {
+      method: 'post',
+      url: _url,
+      headers: {
+        Authorization: token,
+      },
+      data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log('Response: ', response.data.data);
+        response.data.data.user.avatar =
+          SERVER_ROOT + response.data.data.user.avatar;
+
+        if (response.data.success) {
+          dispatch(loginSuccess(response.data.data.user));
+        }
+        dispatch(clearAuthState());
+      })
+      .catch(function (error) {
+        console.log('Err: ', error);
+      });
   };
 }
