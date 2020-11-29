@@ -43,7 +43,7 @@ const PrivateRoute = (privateRouteProps) => {
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.props.dispatch(changeMode('home'));
+    // this.props.dispatch(changeMode('home'));
   }
   componentWillUnmount() {
     console.log('unmount');
@@ -71,7 +71,6 @@ class App extends React.Component {
 
   render() {
     const { property, auth } = this.props;
-    console.log('PROPS: ', property);
 
     return (
       <div>

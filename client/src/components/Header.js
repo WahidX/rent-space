@@ -7,12 +7,10 @@ class Header extends Component {
   logOut = () => {
     localStorage.removeItem('token');
     this.props.dispatch(logoutUser());
-    console.log('done');
   };
 
   render() {
     const { auth } = this.props;
-    console.log('PROPS of HEADER : ', auth);
 
     return (
       <header id="header-container">

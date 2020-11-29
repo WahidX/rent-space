@@ -117,7 +117,7 @@ module.exports.toggleFavourite = async function (req, res) {
       message = 'Removed from favourites';
       req.user.favourites.splice(index, 1);
     }
-    req.user.save();
+    req.user = await req.user.save();
 
     return res.status(200).json({
       message,
@@ -164,46 +164,52 @@ module.exports.toggleApply = async function (req, res) {
       });
     }
 
-    let index = -1;
-    let applied = req.user.applied;
+    // Checkingif the prop already applied or not
 
-    for (i = 0; i < applied.length; i++) {
-      if (applied[i].id === property.id) {
-        index = i;
-        break;
-      }
-    }
+    let application = await Application.findOne({
+      property: property._id,
+      tenant: req.user._id,
+    });
 
-    let message = '';
-    if (index === -1) {
-      message = 'Applied for the property';
-      req.user.applied.push(property);
-
-      // Adding in Application model
-      let application = await Application.create({
+    if (application === null) {
+      console.log('Creating application');
+      application = await Application.create({
         property: property.id,
         seller: property.seller,
         tenant: req.user.id,
         status: 'Pending',
       });
-      // Should send a mail to seller
-    } else {
-      req.user.applied.splice(index, 1);
 
-      let application = await Application.find({
-        tenant: req.user.id,
-        property: property.id,
-      });
+      req.user.applied.push(property.id);
+      property.applications.push(application.id);
+    } else if (application.status === 'Pending') {
+      console.log('Cancelling');
 
       application.remove();
+      req.user.applied.splice(req.user.applied.indexOf(property.id), 1);
+      property.applications.splice(
+        property.applications.indexOf(application.id),
+        1
+      );
+    } else {
+      return res.status(401).json({
+        message: 'Request not permitted',
+      });
     }
-    req.user.save();
+    property = await property.save();
+    req.user = await req.user.save();
+
+    let user = await User.findById(req.user.id)
+      .populate({ path: 'favourites' })
+      .populate({ path: 'applied' });
+
+    // console.log('USER: ', user);
 
     return res.status(200).json({
-      message,
+      message: 'Successful',
       success: true,
       data: {
-        applied: req.user.applied,
+        applied: user.applied,
       },
     });
   } catch (err) {
@@ -237,7 +243,7 @@ module.exports.updateProfile = async function (req, res) {
 
           user.avatar = User.avatarPath + '/' + req.file.filename;
         }
-        user.save();
+        user = await user.save();
 
         // Getting user's all data
         user = await User.findById(user._id)

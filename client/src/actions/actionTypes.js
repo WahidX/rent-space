@@ -1,8 +1,10 @@
 export const UPDATE_PROPERTY = 'UPDATE_PROPERTY';
 export const UPDATE_MODE = 'UPDATE_MODE';
+export const UPDATE_USER = 'UPDATE_USER';
 
-// Favourite handling
+// Favourite - Apply handling
 export const TOGGLE_FAVOURITE = 'TOGGLE_FAVOURITE';
+export const TOGGLE_APPLY = 'TOGGLE_APPLY';
 
 // login actions
 export const LOGIN_START = 'LOGIN_START';

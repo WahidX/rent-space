@@ -48,7 +48,6 @@ code {
 #profile-links {
   display: flex;
   flex-direction: row;
-  justify-content: end;
 }
 
 #profile-links a {

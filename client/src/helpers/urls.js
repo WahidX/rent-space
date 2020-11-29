@@ -6,5 +6,6 @@ export const APIurls = {
   signup: () => `${API_ROOT}/user/create-user`,
   fetchProperty: (query) => `${API_ROOT}/search/?${query}`,
   toggleFavourite: (id) => `${API_ROOT}/user/toggle-fav/${id}`,
+  toggleApply: (id) => `${API_ROOT}/user/toggle-apply/${id}`,
   updateProfile: (id) => `${API_ROOT}/user/update/${id}`,
 };

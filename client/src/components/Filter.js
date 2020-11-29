@@ -27,7 +27,6 @@ class Filter extends Component {
   };
 
   render() {
-    console.log('STATE:: ', this.state);
     return (
       <form id="filter-main">
         <div id="filter-container">

@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchToggleFavourite } from '../actions/property';
+import { fetchToggleApply, fetchToggleFavourite } from '../actions/property';
 
 class PropertyCard extends Component {
   handleFavouriteToggle = (e) => {
     this.props.dispatch(fetchToggleFavourite(this.props.property._id));
+  };
+
+  handleApplyToggle = (e) => {
+    this.props.dispatch(fetchToggleApply(this.props.property._id));
   };
 
   render() {
@@ -91,7 +95,7 @@ class PropertyCard extends Component {
               <br />
               Favourites
             </button>
-            <button className="warning">
+            <button className="warning" onClick={this.handleApplyToggle}>
               {!flagApplied && 'Apply'}
               {flagApplied && 'Cancel'}
               <br />

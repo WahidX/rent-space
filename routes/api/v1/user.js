@@ -13,7 +13,7 @@ router.post('/update/:id', verifyJWT, userAPI.updateProfile);
 router.get('/toggle-fav/:id', verifyJWT, userAPI.toggleFavourite);
 router.get('/favs', verifyJWT, userAPI.getFavourites);
 
-// router.get('/apply', )
+router.get('/toggle-apply/:id', verifyJWT, userAPI.toggleApply);
 // router.get('/rm-apply', )
 // router.get('/applied', )
 

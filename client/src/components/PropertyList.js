@@ -5,7 +5,6 @@ import { PropertyCard } from './';
 
 class PropertyList extends Component {
   render() {
-    console.log('helu', this.props);
     let properties = this.props.property.properties;
 
     if (this.props.property.mode === 'home') {
@@ -15,8 +14,6 @@ class PropertyList extends Component {
     } else {
       properties = this.props.applied;
     }
-
-    console.log('LIST : ', properties);
 
     return (
       <div id="property-container">

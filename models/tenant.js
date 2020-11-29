@@ -34,7 +34,7 @@ const tenantSchema = new mongoose.Schema(
     applied: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Application',
+        ref: 'Property',
       },
     ],
   },

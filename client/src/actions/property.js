@@ -1,4 +1,9 @@
-import { UPDATE_MODE, UPDATE_PROPERTY, TOGGLE_FAVOURITE } from './actionTypes';
+import {
+  UPDATE_MODE,
+  UPDATE_PROPERTY,
+  TOGGLE_FAVOURITE,
+  TOGGLE_APPLY,
+} from './actionTypes';
 import { APIurls } from '../helpers/urls';
 import { getFormBody } from '../helpers/utils';
 
@@ -6,7 +11,7 @@ export function fetchProperty(filters) {
   let query = '';
   if (filters) {
     query = getFormBody(filters);
-    console.log('FormBody: ', query);
+    // console.log('FormBody: ', query);
   }
 
   return (dispatch) => {
@@ -17,7 +22,7 @@ export function fetchProperty(filters) {
       })
       .then((data) => {
         if (data.data) {
-          console.log('DATA from API : ', data.data.properties);
+          // console.log('DATA from API : ', data.data.properties);
           dispatch(updateProperty(data.data.properties));
         }
       });
@@ -54,7 +59,7 @@ export function fetchToggleFavourite(id) {
       })
       .then((data) => {
         if (data.data) {
-          console.log('DATA from toggle API : ', data.data.favourites);
+          // console.log('DATA from fav toggle API : ', data.data.favourites);
           dispatch(toggleFavourite(data.data.favourites));
         }
       });
@@ -65,5 +70,34 @@ export function toggleFavourite(favourites) {
   return {
     type: TOGGLE_FAVOURITE,
     favourites,
+  };
+}
+
+export function fetchToggleApply(id) {
+  return (dispatch) => {
+    const url = APIurls.toggleApply(id);
+    const token = localStorage.getItem('token');
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        Authorization: token,
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        if (data.data) {
+          // console.log('DATA from apply toggle API : ', data.data.applied);
+          dispatch(toggleApply(data.data.applied));
+        }
+      });
+  };
+}
+
+export function toggleApply(applied) {
+  return {
+    type: TOGGLE_APPLY,
+    applied,
   };
 }
