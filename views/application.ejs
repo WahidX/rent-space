@@ -49,9 +49,12 @@
     <% for (app of applications){ %>
     <div class="list-item" id="application-<%= app._id %>">
       <img width="100px" height="100px" />
+      <!-- Property title, price rent -->
       <div class="tenant-details">
+        <!-- avatar -->
         <p><%= app.tenant.name %></p>
         <p><%= app.tenant.contact %></p>
+        <p><%= app.tenant.email %></p>
       </div>
       <div class="btns">
         <a href=""><button class="btn btn-outline-success">accept</button></a>

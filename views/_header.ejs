@@ -5,6 +5,7 @@
 
   <% if(locals.user){ %>
   <p><%= user.name %></p>
+  <a href="/application">Applications</a>
   <p class="h-btn"><a href="/auth/sign-out">Sign Out</a></p>
   <p class="h-btn"><a href="/auth/password-check">Reset Password</a></p>
   <% } else { %>

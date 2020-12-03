@@ -1,25 +1,35 @@
 const passport = require('passport');
-const Property = require('../models/property');
-const Seller = require('../models/seller');
 const Application = require('../models/application');
 
 module.exports = {
   applicationHome: async function (req, res) {
-    // http://localhost:8000/application?mode=all
+    // http://localhost:8000/application?mode=Pending
 
     let applications;
 
-    if (!req.query.mode) {
-      applications = await Application.find({ seller: req.user._id }).populate(
-        'seller',
-        'property',
-        'tenant'
-      );
+    if (req.query.mode === undefined) {
+      applications = await Application.find({ seller: req.user.id })
+        .populate({
+          path: 'tenant',
+          select: 'name email contact',
+        })
+        .populate({
+          path: 'property',
+          select: 'title location image rent price',
+        });
     } else {
       applications = await Application.find({
-        seller: req.user._id,
+        seller: req.user.id,
         status: req.query.mode,
-      }).populate('property', 'tenant');
+      })
+        .populate({
+          path: 'tenant',
+          select: 'name email contact',
+        })
+        .populate({
+          path: 'property',
+          select: 'title location image rent price',
+        });
     }
 
     return res.render('application', {
