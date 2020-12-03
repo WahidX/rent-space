@@ -33,29 +33,30 @@
   </div>
 
   <div id="application-list-container">
-    <div class="list-item">
-      <img width="100px" height="100px" />
-      <div class="tenant-details">
-        <p>tenant name</p>
-        <p>tenant contact</p>
-        <p>tenant message</p>
-      </div>
-      <div class="btns">
-        <button class="btn btn-outline-success">accept</button>
-        <button class="btn btn-outline-danger">reject</button>
-      </div>
-    </div>
-
     <% for (app of applications){ %>
     <div class="list-item" id="application-<%= app._id %>">
-      <img width="100px" height="100px" />
-      <!-- Property title, price rent -->
-      <div class="tenant-details">
-        <!-- avatar -->
-        <p><%= app.tenant.name %></p>
-        <p><%= app.tenant.contact %></p>
-        <p><%= app.tenant.email %></p>
+      <div class="div">
+        <img class="property-pic" />
+        <div class="details">
+          <p><%= app.property.title %></p>
+          <p><%= app.property.location %></p>
+          <% if(app.property.price) { %>
+          <p><%= app.property.price %></p>
+          <% } else { %>
+          <p><%= app.property.rent %></p>
+          <% } %>
+        </div>
       </div>
+
+      <div class="div">
+        <img src="<%= app.tenant.avatar %>" class="tenant-avatar" />
+        <div class="details">
+          <p><%= app.tenant.name %></p>
+          <p><%= app.tenant.email %></p>
+          <p><%= app.tenant.contact %></p>
+        </div>
+      </div>
+
       <div class="btns">
         <a href=""><button class="btn btn-outline-success">accept</button></a>
         <a href=""><button class="btn btn-outline-danger">reject</button></a>

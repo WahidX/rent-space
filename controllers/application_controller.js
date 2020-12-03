@@ -11,7 +11,7 @@ module.exports = {
       applications = await Application.find({ seller: req.user.id })
         .populate({
           path: 'tenant',
-          select: 'name email contact',
+          select: 'name email contact avatar',
         })
         .populate({
           path: 'property',
@@ -24,13 +24,15 @@ module.exports = {
       })
         .populate({
           path: 'tenant',
-          select: 'name email contact',
+          select: 'name email contact avatar',
         })
         .populate({
           path: 'property',
           select: 'title location image rent price',
         });
     }
+
+    console.log('Applications: ', applications);
 
     return res.render('application', {
       title: 'Application',

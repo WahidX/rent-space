@@ -15,8 +15,26 @@
       padding: 10px;
       margin: 5px;
       border-radius: 10px;
+      flex-wrap: wrap;
       background-color: #b8d5f0;
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.6); }
+      #application-main-container #application-list-container .list-item .div {
+        display: flex;
+        flex-direction: row;
+        padding: 10px; }
+        #application-main-container #application-list-container .list-item .div .property-pic {
+          width: 150px;
+          height: 150px; }
+        #application-main-container #application-list-container .list-item .div .tenant-avatar {
+          width: 100px;
+          height: 100px;
+          border-radius: 50%; }
+        #application-main-container #application-list-container .list-item .div .details {
+          margin: auto;
+          margin-left: 15px;
+          display: flex;
+          flex-direction: column;
+          justify-content: start; }
       #application-main-container #application-list-container .list-item .btns {
         margin-right: 20px;
         display: flex;
