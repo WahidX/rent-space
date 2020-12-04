@@ -11,6 +11,7 @@ import PropertyCard from './PropertyCard';
 import Favourite from './Favourite';
 import Applied from './Applied';
 import Profile from './Profile';
+import PropertyPage from './PropertyPage';
 
 export {
   App,
@@ -26,4 +27,5 @@ export {
   Favourite,
   Applied,
   Profile,
+  PropertyPage,
 };

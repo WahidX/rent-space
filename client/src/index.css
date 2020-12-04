@@ -219,10 +219,10 @@ button {
 
 #property-container .property-item {
   background-color: rgb(133, 176, 255);
-  width: 30%;
+  width: 35%;
   max-width: 310px;
   min-width: 290px;
-  height: 365px;
+  height: auto;
   margin: 20px;
   padding: 6px;
   border-radius: 6px;
@@ -307,6 +307,45 @@ button {
 .gold:hover {
   background-color: rgb(175, 149, 0);
   color: white;
+}
+
+/* Single Property Page */
+.single-page .property-item {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.single-page .property-item img {
+  border-radius: 3%;
+}
+
+.single-page .property-item .card-title {
+  font-size: 3rem;
+}
+
+.single-page .property-item .card-description {
+  font-size: 1.5rem;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: rgb(62, 62, 255) 2px solid;
+}
+
+.single-page .property-item .details-container {
+  margin-top: 30px;
+  margin-bottom: 50px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
+  border-radius: 20px;
+}
+
+.single-page .property-item .card-btn-container {
+  display: flex;
+  flex-direction: row;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
+}
+
+.single-page .property-item .card-btn-container * {
+  margin: auto;
 }
 
 /* Footer */

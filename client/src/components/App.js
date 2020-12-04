@@ -18,6 +18,7 @@ import {
   Favourite,
   Applied,
   Profile,
+  PropertyPage,
 } from './index';
 // Actions
 import { fetchProperty, changeMode } from '../actions/property';
@@ -77,6 +78,13 @@ class App extends React.Component {
               component={Applied}
               isLoggedin={auth.isLoggedin}
             />
+            <PrivateRoute
+              exact
+              path="/property"
+              component={PropertyPage}
+              isLoggedin={auth.isLoggedin}
+            />
+
             <Route exact path="/signin" component={SigninForm} />
             <Route exact path="/signup" component={SignupForm} />
             <Route component={Page404} />

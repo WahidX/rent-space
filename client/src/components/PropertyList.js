@@ -18,7 +18,7 @@ class PropertyList extends Component {
     return (
       <div id="property-container">
         {properties.map((property) => (
-          <PropertyCard key={property._id} property={property} />
+          <PropertyCard key={property._id} mode="card" property={property} />
         ))}
       </div>
     );

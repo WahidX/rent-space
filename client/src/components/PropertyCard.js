@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { fetchToggleApply, fetchToggleFavourite } from '../actions/property';
 
@@ -13,7 +14,8 @@ class PropertyCard extends Component {
   };
 
   render() {
-    let { property } = this.props;
+    let { property, mode } = this.props;
+
     let flagFav = false;
     let flagApplied = false;
 
@@ -46,6 +48,10 @@ class PropertyCard extends Component {
             {property.title.length > 70
               ? property.title.slice(0, 70) + '...'
               : property.title}
+          </span>
+
+          <span className="card-description">
+            {mode === 'single' && property.description}
           </span>
 
           <div className="details-container">
@@ -85,9 +91,16 @@ class PropertyCard extends Component {
 
           <div className="card-btn-container">
             <button className="normal">
-              View
-              <br />
-              Property
+              <Link
+                to={{
+                  pathname: '/property',
+                  property: property,
+                }}
+              >
+                View
+                <br />
+                Property
+              </Link>
             </button>
             <button className="gold" onClick={this.handleFavouriteToggle}>
               {!flagFav && 'Add to'}
