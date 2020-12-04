@@ -22,7 +22,7 @@ import {
 } from './index';
 // Actions
 import { fetchProperty, changeMode } from '../actions/property';
-import { authenticateUser } from '../actions/auth';
+import { authenticateUser, fetchUser } from '../actions/auth';
 
 const PrivateRoute = (privateRouteProps) => {
   const { isLoggedin, path, component: Component } = privateRouteProps;
@@ -41,32 +41,29 @@ const PrivateRoute = (privateRouteProps) => {
 };
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    // this.props.dispatch(changeMode('home'));
-  }
   componentWillUnmount() {
     console.log('unmount');
   }
   componentDidMount() {
     this.props.dispatch(changeMode('home'));
     this.props.dispatch(fetchProperty());
-    const token = localStorage.getItem('token');
-    if (token) {
-      const user = jwt_decode(token);
+    this.props.dispatch(fetchUser());
+    // const token = localStorage.getItem('token');
+    // if (token) {
+    //   const user = jwt_decode(token);
 
-      this.props.dispatch(
-        authenticateUser({
-          email: user.email,
-          _id: user._id,
-          name: user.name,
-          avatar: user.avatar,
-          favourites: user.favourites,
-          applied: user.applied,
-          contact: user.contact,
-        })
-      );
-    }
+    //   this.props.dispatch(
+    //     authenticateUser({
+    //       email: user.email,
+    //       _id: user._id,
+    //       name: user.name,
+    //       avatar: user.avatar,
+    //       favourites: user.favourites,
+    //       applied: user.applied,
+    //       contact: user.contact,
+    //     })
+    //   );
+    // }
   }
 
   render() {

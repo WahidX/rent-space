@@ -38,6 +38,7 @@ module.exports.createSession = async function (req, res) {
       },
     });
   } catch (err) {
+    console.error(err);
     return res.status(422).json({
       message: 'Incorrect email/password',
     });
@@ -85,6 +86,28 @@ module.exports.createUser = async function (req, res) {
     console.log('Err:  ', err);
     return res.status(500).json({
       message: 'Internal Server Error',
+    });
+  }
+};
+
+module.exports.authenticate = async function (req, res) {
+  try {
+    let user = await User.findById(req.user.id)
+      .select('name _id email contact avatar')
+      .populate({ path: 'favourites' })
+      .populate({ path: 'applied' });
+
+    return res.status(200).json({
+      message: 'Authenticated',
+      success: true,
+      data: {
+        user,
+      },
+    });
+  } catch (err) {
+    console.log('Err: ', err);
+    return res.status(401).json({
+      message: 'Invalid User!',
     });
   }
 };

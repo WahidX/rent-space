@@ -107,6 +107,30 @@ export function signup(name, email, password, confirm_password, contact) {
   };
 }
 
+export function fetchUser() {
+  return (dispatch) => {
+    const token = localStorage.getItem('token');
+    const url = APIurls.fetchUser();
+
+    var config = {
+      method: 'GET',
+      url,
+      headers: {
+        Authorization: token,
+      },
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log('reponse: ', response.data);
+        dispatch(authenticateUser(response.data.data.user));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+}
+
 export function authenticateUser(user) {
   return {
     type: AUTHENTICATE_USER,
