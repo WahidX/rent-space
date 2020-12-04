@@ -32,7 +32,7 @@ module.exports.createSession = async function (req, res) {
       success: true,
       data: {
         user,
-        token: jwt.sign(user.toJSON(), env.jwt_secret, {
+        token: jwt.sign({ _id: user._id }, env.jwt_secret, {
           expiresIn: '10000000',
         }),
       },
@@ -77,7 +77,7 @@ module.exports.createUser = async function (req, res) {
       success: true,
       data: {
         user: newUser,
-        token: jwt.sign(newUser.toJSON(), env.jwt_secret, {
+        token: jwt.sign({ _id: newUser._id }, env.jwt_secret, {
           expiresIn: '10000000',
         }),
       },

@@ -6,7 +6,6 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import jwt_decode from 'jwt-decode';
 
 // Components
 import {
@@ -22,7 +21,7 @@ import {
 } from './index';
 // Actions
 import { fetchProperty, changeMode } from '../actions/property';
-import { authenticateUser, fetchUser } from '../actions/auth';
+import { fetchUser } from '../actions/auth';
 
 const PrivateRoute = (privateRouteProps) => {
   const { isLoggedin, path, component: Component } = privateRouteProps;
@@ -48,22 +47,6 @@ class App extends React.Component {
     this.props.dispatch(changeMode('home'));
     this.props.dispatch(fetchProperty());
     this.props.dispatch(fetchUser());
-    // const token = localStorage.getItem('token');
-    // if (token) {
-    //   const user = jwt_decode(token);
-
-    //   this.props.dispatch(
-    //     authenticateUser({
-    //       email: user.email,
-    //       _id: user._id,
-    //       name: user.name,
-    //       avatar: user.avatar,
-    //       favourites: user.favourites,
-    //       applied: user.applied,
-    //       contact: user.contact,
-    //     })
-    //   );
-    // }
   }
 
   render() {
