@@ -3,7 +3,6 @@ const router = express.Router();
 
 router.use('/search', require('./search'));
 router.use('/user', require('./user'));
-// router.use('/favourite', );
-// router.use('/applied', );
+router.use('/application', require('./application'));
 
 module.exports = router;
