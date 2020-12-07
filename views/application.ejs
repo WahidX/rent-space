@@ -58,8 +58,19 @@
       </div>
 
       <div class="btns">
-        <a href=""><button class="btn btn-outline-success">accept</button></a>
-        <a href=""><button class="btn btn-outline-danger">reject</button></a>
+        <% if(app.status==='Pending') { %>
+        <a href="/application/accept?id=<%= app._id %>"
+          ><button class="btn btn-outline-success">Accept</button></a
+        >
+        <a href="/application/reject?id=<%= app._id %>"
+          ><button class="btn btn-outline-danger">Reject</button></a
+        >
+
+        <% } else if (app.status === 'Accepted') { %>
+        <button class="btn btn-outline-success" disabled>Accepted</button>
+        <% } else { %>
+        <button class="btn btn-outline-danger" disabled>Rejected</button>
+        <% } %>
       </div>
     </div>
     <% } %>

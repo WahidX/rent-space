@@ -32,12 +32,62 @@ module.exports = {
         });
     }
 
-    console.log('Applications: ', applications);
-
     return res.render('application', {
       title: 'Application',
       mode: req.query.mode,
       applications,
     });
+  },
+
+  acceptApplication: async function (req, res) {
+    if (!req.query.id) {
+      req.flash('error', 'Invalid Request');
+      return res.redirect('back');
+    }
+
+    try {
+      let application = await Application.findById(req.query.id);
+
+      if (
+        application.seller == req.user.id &&
+        application.status === 'Pending'
+      ) {
+        application.status = 'Accepted';
+        application.save();
+        req.flash('success', 'Accepted!');
+      } else {
+        throw 'wrong user/status';
+      }
+
+      return res.redirect('back');
+    } catch (err) {
+      req.flash('error', 'Invalid Request!');
+      return res.redirect('back');
+    }
+  },
+
+  rejectApplication: async function (req, res) {
+    if (!req.query.id) {
+      req.flash('error', 'Invalid Request');
+      return res.redirect('back');
+    }
+    try {
+      let application = await Application.findById(req.query.id);
+
+      if (
+        application.seller == req.user.id &&
+        application.status === 'Pending'
+      ) {
+        application.status = 'Rejected';
+        application.save();
+        req.flash('success', 'Rejected!');
+      } else {
+        throw 'wrong user/status';
+      }
+      return res.redirect('back');
+    } catch (err) {
+      req.flash('error', 'Invalid Request!');
+      return res.redirect('back');
+    }
   },
 };
